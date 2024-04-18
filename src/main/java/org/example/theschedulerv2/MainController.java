@@ -29,9 +29,9 @@ public class MainController implements Initializable {
     @FXML
     private TextField codeField;
     @FXML
-    private TextField startField;
+    private ChoiceBox<String> startField;
     @FXML
-    private TextField endField;
+    private ChoiceBox<String> endField;
     @FXML
     private CheckBox MondayBox;
     @FXML
@@ -46,6 +46,9 @@ public class MainController implements Initializable {
     private ChoiceBox<String> yearField;
     @FXML
     private ChoiceBox<String> majorField;
+
+    private String[] times = {"800", "900", "1000", "1100", "1200", "1300", "1400", "1500", "1600",
+                                "1700", "1800", "1900", "2000", "2100", "2200"};
 
     private String[] yearList = {"Freshmen", "Sophomore", "Junior", "Senior"};
 
@@ -164,13 +167,13 @@ public class MainController implements Initializable {
             } else {
                 code = "";
             }
-            if (!Objects.equals(startField.getText(), "")) {
-                start = Integer.parseInt(startField.getText());
+            if (startField.getValue() != null && !startField.getValue().isEmpty()) {
+                start = Integer.parseInt(startField.getValue());
             } else {
                 start = 0;
             }
-            if (!Objects.equals(endField.getText(), "")) {
-                end = Integer.parseInt(endField.getText());
+            if (endField.getValue() != null && !endField.getValue().isEmpty()) {
+                end = Integer.parseInt(endField.getValue());
             } else {
                 end = 2359;
             }
@@ -212,5 +215,7 @@ public class MainController implements Initializable {
         instructorField.getItems().addAll(instructorList);
         majorField.getItems().addAll(departmentList);
         yearField.getItems().addAll(yearList);
+        startField.getItems().addAll(times);
+        endField.getItems().addAll(times);
     }
 }

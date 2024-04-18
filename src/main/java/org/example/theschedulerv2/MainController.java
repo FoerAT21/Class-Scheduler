@@ -42,7 +42,6 @@ public class MainController implements Initializable {
     private CheckBox ThursdayBox;
     @FXML
     private CheckBox FridayBox;
-
     @FXML
     private ChoiceBox<String> yearField;
     @FXML

@@ -7,13 +7,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Search {
-    public static void main(String[] args) {
-        // Used to test search method
-        ArrayList<Class> classes = search("COMP", null, null, null, null, null, "900", "1115",null);
-        for (Class c : classes){
-            System.out.println(c);
-        }
-    }
+//    public static void main(String[] args) {
+//        // Used to test search method
+//        ArrayList<Class> classes = search("COMP", null, null, null, null, null, "900", "1115",null);
+//        for (Class c : classes){
+//            System.out.println(c);
+//        }
+//    }
 
     private static Connection connect() {
         // SQLite's connection string

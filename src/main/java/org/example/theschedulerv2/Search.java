@@ -8,7 +8,11 @@ import java.sql.Statement;
 
 public class Search {
     public static void main(String[] args) {
-        search("COMP", null, null, null, null, null, "9:00 AM", null,null);
+        // Used to test search method
+        ArrayList<Class> classes = search("COMP", null, null, null, null, null, "900", "1115",null);
+        for (Class c : classes){
+            System.out.println(c);
+        }
     }
 
     private static Connection connect() {
@@ -33,8 +37,8 @@ public class Search {
         if (CourseName != null){query.append(" /name LIKE '%" + CourseName + "%'");}
         if (NumCredits != null){query.append(" /hours = '" + NumCredits + "'");}
         if (DaysOfWeek != null){query.append(" /weekday = '" + DaysOfWeek + "'");}
-        if (StartTime != null){query.append(" /startTime >= '" + StartTime + "'");}
-        if (EndTime != null){query.append(" /TIME(endTime) <= TIME(" + EndTime + ")");}
+        if (StartTime != null){query.append(" /startTime_int >= " + StartTime);}
+        if (EndTime != null){query.append(" /endTime_int <= " + EndTime);}
         if (InstructorName != null){query.append(" /professorName LIKE  '%" + InstructorName + "%'");}
         String q = query.toString();
         return q.replaceFirst("/", "").replaceAll("/", "AND ");
@@ -44,6 +48,8 @@ public class Search {
         Connection conn = null;
         Statement stmt = null;
         ResultSet rs = null;
+        // ArrayList to hold classes
+        ArrayList<Class> results = new ArrayList<>();
 
         try {
             // Establishing the connection
@@ -63,8 +69,14 @@ public class Search {
                 String department = rs.getString("department");
                 int courseNumber = rs.getInt("number");
                 String section = rs.getString("section");
-                // Process the data
-                System.out.println("Dep: " + department + ", CourseNum: " + courseNumber + "Section" + section);
+                String courseID = department + " " + courseNumber + " " + section;
+                String courseName = rs.getString("name");
+                int numCredits = rs.getInt("hours");
+                String daysOfWeek = rs.getString("weekday");
+                int startTime = rs.getInt("startTime_int");
+                int endTime = rs.getInt("endTime_int");
+                String instructorName = rs.getString("professorName");
+                results.add(new Class(courseID, courseName, numCredits, daysOfWeek, startTime, endTime, instructorName, department));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -78,6 +90,6 @@ public class Search {
                 e.printStackTrace();
             }
         }
-        return null;
+        return results;
     }
 }

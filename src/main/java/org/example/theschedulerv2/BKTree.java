@@ -34,11 +34,12 @@ public class BKTree {
         }
     }
 
-    private final int THRESHOLD = 3;
+    private int THRESHOLD;
     private Node ROOT;
 
 
-    public BKTree(String filePath) throws FileNotFoundException {
+    public BKTree(String filePath, int THRESHOLD) throws FileNotFoundException {
+        this.THRESHOLD = THRESHOLD;
         Scanner input = new Scanner(new File(filePath));
         ROOT = new Node(input.next());
 
@@ -57,6 +58,7 @@ public class BKTree {
     }
 
     public ArrayList<String> search(String word){
+        word = word.toUpperCase();
         ArrayList<String> searchResults = new ArrayList<>();
         if(levDistance(ROOT.word, word) <= THRESHOLD) searchResults.add(word);
 
@@ -65,15 +67,19 @@ public class BKTree {
 
         while(!nodes.isEmpty()){
             Node temp = nodes.remove();
+            int lev = levDistance(temp.word, word);
+            if(lev <= THRESHOLD && lev != 0) searchResults.add(temp.word);
 
-            for(int x : temp.childrenAtDistances.keySet()){
-                Node child = temp.childrenAtDistances.get(x);
-                if(x <= THRESHOLD)
-                    searchResults.add(child.word);
-                nodes.add(child);
+
+            for(int distanceChildParent: temp.childrenAtDistances.keySet()){
+                Node child = temp.childrenAtDistances.get(distanceChildParent);
+
+                if((lev-THRESHOLD) <= distanceChildParent
+                        && (lev+THRESHOLD) >= distanceChildParent) nodes.add(child);
             }
         }
 
+        System.out.println(searchResults);
         return searchResults;
     }
 
@@ -118,9 +124,5 @@ public class BKTree {
         return levVals[1][x.length()];
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
-        BKTree test = new BKTree("C:\\Users\\FOERSTAT21\\OneDrive - Grove City College\\Semester 6\\Software Engineering\\TheSchedulerV2\\src\\course_id_dict.txt");
-        System.out.println(test.search("COMP300"));
-    }
 
 }

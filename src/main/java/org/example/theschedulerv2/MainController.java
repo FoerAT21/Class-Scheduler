@@ -15,8 +15,10 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.Scanner;
 
 public class MainController implements Initializable {
 
@@ -47,19 +49,19 @@ public class MainController implements Initializable {
     @FXML
     private ChoiceBox<String> majorField;
 
-    private String[] times = {"800", "900", "1000", "1100", "1200", "1300", "1400", "1500", "1600",
+    private String[] times = {"none", "800", "900", "1000", "1100", "1200", "1300", "1400", "1500", "1600",
                                 "1700", "1800", "1900", "2000", "2100", "2200"};
 
     private String[] yearList = {"Freshmen", "Sophomore", "Junior", "Senior"};
 
-    private String[] departmentList = {"ACCT", "ART", "ASTR", "BIOL", "CHEM",
+    private String[] departmentList = {"none", "ACCT", "ART", "ASTR", "BIOL", "CHEM",
             "CMIN", "COMM", "COMP", "DESI", "ECON", "EDUC", "ELEE", "ENGL", "ENGR",
             "ENTR", "EXER", "FNCE", "FREN", "GEOL", "GREK", "HEBR", "HIST", "HUMA",
             "INBS", "LATN", "MARK", "MATH", "MECE", "MNGT", "MUSI", "NURS", "PHIL",
             "PHYE", "PHYS", "POLS", "PSYC", "RELI", "ROBO", "SCIC", "SEDU", "SOCI",
             "SOCW", "SPAN", "SSFT", "THEA", "WRIT"};
 
-    private String[] instructorList = {"Agnew, Rochelle", "Al Moakar, Lory", "Allison, Blair", "Anderson, Erik",
+    private String[] instructorList = {"none", "Agnew, Rochelle", "Al Moakar, Lory", "Allison, Blair", "Anderson, Erik",
             "Antoszewski, Lisa", "Archibald, C", "Augspurger, Joseph", "Ault, Dana",
             "Ayers, David", "Baker, Elizabeth", "Bancroft, Eric", "Bandy, Gregory",
             "Barbour, Kristin", "Bardy, Erik", "Bellassai, Anthony", "Berry, Matthew",
@@ -119,8 +121,8 @@ public class MainController implements Initializable {
     String department;
     String instructor;
     String code;
-    int start;
-    int end;
+    String start;
+    String end;
     String day;
     String major;
     String year;
@@ -147,35 +149,76 @@ public class MainController implements Initializable {
                 day += "F";
             }
 
+            if(day.isEmpty()) day = null;
+
             if (!Objects.equals(nameField.getText(), "")) {
                 name = nameField.getText();
             } else {
-                name = "";
+                name = null;
             }
+
             if (!Objects.equals(departmentField.getValue(), "")) {
                 department = departmentField.getValue();
+
+                // Allows user to take out value
+                if(department != null && department.equals("none")) {
+                    departmentField.setValue("");
+                    department = null;
+                }
+
             } else {
-                department = "";
+                department = null;
             }
+
             if (!Objects.equals(instructorField.getValue(), "")) {
                 instructor = instructorField.getValue();
+
+                // Allows user to take out value
+                if(instructor != null && instructor.equals("none")){
+                    instructorField.setValue("");
+                    instructor = null;
+                }
+
+                // Formats name of instructor properly for database
+                if(instructor != null){
+                    Scanner temp = new Scanner(instructor);
+                    temp.useDelimiter(", ");
+                    String lastName = temp.next();
+                    String firstName = temp.next();
+                    instructor = firstName + " " + lastName;
+                }
+
+
             } else {
-                instructor = "";
+                instructor = null;
             }
             if (!Objects.equals(codeField.getText(), "")) {
                 code = codeField.getText();
             } else {
-                code = "";
+                code = null;
             }
             if (startField.getValue() != null && !startField.getValue().isEmpty()) {
-                start = Integer.parseInt(startField.getValue());
+                start = startField.getValue();
+
+                // Allows user to take out value
+                if(start != null && start.equals("none")){
+                    startField.setValue("");
+                    start = null;
+                }
             } else {
-                start = 0;
+                start = null;
             }
+
             if (endField.getValue() != null && !endField.getValue().isEmpty()) {
-                end = Integer.parseInt(endField.getValue());
+                end = endField.getValue();
+
+                // Allows user to take out value
+                if(end != null && end.equals("none")){
+                    endField.setValue("");
+                    end = null;
+                }
             } else {
-                end = 2359;
+                end = null;
             }
 
             System.out.println(name);
@@ -185,6 +228,16 @@ public class MainController implements Initializable {
             System.out.println(start);
             System.out.println(end);
             System.out.println(day);
+
+            ArrayList<Class> classes = Search.search(
+                    department, code, null, name, null,
+                    day, start, end, instructor
+            );
+
+            for(Class c : classes)
+                System.out.println(c);
+
+
 
             try {
                 Parent child = FXMLLoader.load(getClass().getResource("courseWindow.fxml"));

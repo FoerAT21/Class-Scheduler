@@ -160,6 +160,7 @@ public class MainController implements Initializable {
             if (!Objects.equals(departmentField.getValue(), "")) {
                 department = departmentField.getValue();
 
+                // Allows user to take out value
                 if(department != null && department.equals("none")) {
                     departmentField.setValue("");
                     department = null;
@@ -172,11 +173,13 @@ public class MainController implements Initializable {
             if (!Objects.equals(instructorField.getValue(), "")) {
                 instructor = instructorField.getValue();
 
+                // Allows user to take out value
                 if(instructor != null && instructor.equals("none")){
                     instructorField.setValue("");
                     instructor = null;
                 }
 
+                // Formats name of instructor properly for database
                 if(instructor != null){
                     Scanner temp = new Scanner(instructor);
                     temp.useDelimiter(", ");
@@ -197,6 +200,7 @@ public class MainController implements Initializable {
             if (startField.getValue() != null && !startField.getValue().isEmpty()) {
                 start = startField.getValue();
 
+                // Allows user to take out value
                 if(start != null && start.equals("none")){
                     startField.setValue("");
                     start = null;
@@ -208,6 +212,7 @@ public class MainController implements Initializable {
             if (endField.getValue() != null && !endField.getValue().isEmpty()) {
                 end = endField.getValue();
 
+                // Allows user to take out value
                 if(end != null && end.equals("none")){
                     endField.setValue("");
                     end = null;

@@ -41,6 +41,8 @@ public class Search {
         if (EndTime != null){query.append(" /endTime_int <= " + EndTime);}
         if (InstructorName != null){query.append(" /professorName LIKE  '%" + InstructorName + "%'");}
         String q = query.toString();
+
+        // If nothing was put in, set the search to generate everything.
         if(q.equals("SELECT * FROM course WHERE")) q = "SELECT * FROM course";
         return q.replaceFirst("/", "").replaceAll("/", "AND ");
     }

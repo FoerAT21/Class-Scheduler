@@ -3,7 +3,6 @@ package org.example.theschedulerv2;
 import java.util.ArrayList;
 
 public class SmartSearch {
-    private ArrayList<String> correctWords;
     private String idQueryWord;
     private String nameQueryWord;
     private BKTree courseIDs;
@@ -15,11 +14,10 @@ public class SmartSearch {
         this.idQueryWord = "";
         this.nameQueryWord = "";
 
-        correctWords = new ArrayList<>();
         try{
-            courseIDs = new BKTree("C:\\Users\\FOERSTAT21\\OneDrive - Grove City College\\Semester 6\\Software Engineering\\TheSchedulerV2\\src\\course_id_dict.txt",
+            courseIDs = new BKTree("src/course_id_dict.txt",
                     2);
-            courseNames = new BKTree("C:\\Users\\FOERSTAT21\\OneDrive - Grove City College\\Semester 6\\Software Engineering\\TheSchedulerV2\\src\\course_name_dict.txt",
+            courseNames = new BKTree("src/course_name_dict.txt",
                     2);
         }catch(Exception e){
             System.out.println("Something is severely wrong ");
@@ -50,6 +48,13 @@ public class SmartSearch {
         return this.nameQueryWord;
     }
 
+    public ArrayList<String> idResults(){
+        return this.courseIDs.search(this.idQueryWord);
+    }
+
+    public ArrayList<String> nameResults(){
+        return this.courseNames.search(this.nameQueryWord);
+    }
 
 
 }

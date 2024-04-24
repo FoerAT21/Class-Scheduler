@@ -127,6 +127,7 @@ public class MainController implements Initializable {
     String major;
     String year;
     private Stage stage;
+    public static ArrayList<Class> courseList;
 
     // MainWindow Search Button: Collects all the filter variables and opens courseWindow
     @FXML
@@ -229,13 +230,15 @@ public class MainController implements Initializable {
             System.out.println(end);
             System.out.println(day);
 
-            ArrayList<Class> classes = Search.search(
+            courseList = Search.search(
                     department, code, null, name, null,
                     day, start, end, instructor
             );
 
-            for(Class c : classes)
+            for(Class c : courseList)
                 System.out.println(c);
+
+//            CourseListController clc = new CourseListController(classes);
 
 
 
@@ -255,6 +258,16 @@ public class MainController implements Initializable {
         } catch (Exception e) {
             System.out.println("Exception Message: " + e);
         }
+    }
+
+    @FXML
+    public void saveSchedule(ActionEvent action) {
+        //TODO: save current schedule
+    }
+
+    @FXML
+    public void openSchedule(ActionEvent action) {
+        //TODO: open schedule
     }
 
     public void closeList(Stage stage) {

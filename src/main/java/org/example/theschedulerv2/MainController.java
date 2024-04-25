@@ -1,6 +1,8 @@
 package org.example.theschedulerv2;
 
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -13,6 +15,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -48,6 +52,13 @@ public class MainController implements Initializable {
     private ChoiceBox<String> yearField;
     @FXML
     private ChoiceBox<String> majorField;
+    @FXML
+    private ListView<String> scheduleList;
+    private ArrayList<String> schedules;
+    private String currentSchedule;
+    @FXML
+    private TextField scheduleName;
+    private String nameOfSchedule;
 
     private String[] times = {"none", "800", "900", "1000", "1100", "1200", "1300", "1400", "1500", "1600",
                                 "1700", "1800", "1900", "2000", "2100", "2200"};
@@ -263,16 +274,33 @@ public class MainController implements Initializable {
     @FXML
     public void saveSchedule(ActionEvent action) {
         //TODO: save current schedule
+
+        if (nameOfSchedule.equals("")) {
+            //TODO: please enter name for your scheudle and try again
+        }
+
+        //TODO: call shcedule class and put into the txt file
+
+
     }
 
     @FXML
     public void openSchedule(ActionEvent action) {
         //TODO: open schedule
+        scheduleName.setText(currentSchedule);
+
+        //TODO: get schedule with that name from txt file and view it
+
     }
 
-    public void closeList(Stage stage) {
-        stage.close();
+    @FXML
+    public void nameTheSchedule(ActionEvent action) {
+        nameOfSchedule = scheduleName.getText();
+//        System.out.println(nameOfSchedule);
     }
+
+
+
 
     //Initializes all dropdown options in mainWindow with their expected options
     @Override
@@ -283,5 +311,28 @@ public class MainController implements Initializable {
         yearField.getItems().addAll(yearList);
         startField.getItems().addAll(times);
         endField.getItems().addAll(times);
+
+        String filePath = "src/SavedSchedules.txt";
+
+        schedules = new ArrayList<>();
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] parts = line.split("\\s+");
+                schedules.add(parts[0]);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        scheduleList.getItems().addAll(schedules);
+        scheduleList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                currentSchedule = scheduleList.getSelectionModel().getSelectedItem();
+                System.out.println(currentSchedule);
+            }
+        });
     }
 }

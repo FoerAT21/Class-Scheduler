@@ -5,13 +5,12 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -20,6 +19,7 @@
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
+   <TextField fx:id="scheduleName" alignment="CENTER" onAction="#nameTheSchedule" prefHeight="25.0" prefWidth="575.0" promptText="Enter Schedule Name" />
     <SplitPane dividerPositions="0.2, 0.8" prefHeight="481.0" prefWidth="754.0">
         <items>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="158.0" prefWidth="521.0" VBox.vgrow="ALWAYS">
@@ -190,16 +190,10 @@
                     <ChoiceBox fx:id="majorField" layoutX="19.0" layoutY="74.0" prefHeight="25.0" prefWidth="116.0" />
                     <Label layoutX="48.0" layoutY="99.0" prefHeight="17.0" prefWidth="58.0" text="Select Year" />
                     <ChoiceBox fx:id="yearField" layoutX="19.0" layoutY="116.0" prefHeight="25.0" prefWidth="116.0" />
-               <ScrollPane layoutX="6.0" layoutY="401.0" prefHeight="72.0" prefWidth="139.0">
-                 <content>
-                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="72.0" prefWidth="148.0">
-                        <children>
-                           <HBox prefHeight="72.0" prefWidth="148.0" />
-                        </children></AnchorPane>
-                 </content>
-               </ScrollPane>
                <Label layoutX="32.0" layoutY="383.0" text="Saved Schedules:" />
                <Button fx:id="reccSearchButton" layoutX="50.0" layoutY="160.0" mnemonicParsing="false" text="Search" />
+               <ListView fx:id="scheduleList" layoutX="3.0" layoutY="400.0" prefHeight="121.0" prefWidth="173.0" AnchorPane.bottomAnchor="0.6666666666666714" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.3333333333333144" AnchorPane.topAnchor="400.0" />
+               <Button layoutX="13.0" layoutY="210.0" mnemonicParsing="false" onAction="#saveSchedule" prefHeight="41.0" prefWidth="112.0" text="Save Schedule" AnchorPane.bottomAnchor="228.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="210.0" />
                 </children>
             </AnchorPane>
         </items>

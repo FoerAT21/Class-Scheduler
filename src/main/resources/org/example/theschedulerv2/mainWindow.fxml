@@ -5,11 +5,14 @@
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -49,15 +52,131 @@
             </AnchorPane>
             <AnchorPane VBox.vgrow="ALWAYS">
             <children>
-               <TableView prefHeight="479.0" prefWidth="461.0">
-                 <columns>
-                   <TableColumn prefWidth="92.2" text="Monday" />
-                   <TableColumn prefWidth="92.2" text="Tuesday" />
-                     <TableColumn prefWidth="92.2" text="Wednesday" />
-                     <TableColumn prefWidth="92.2" text="Thursday" />
-                     <TableColumn prefWidth="92.2" text="Friday" />
-                 </columns>
-               </TableView>
+                <GridPane prefHeight="479.0" prefWidth="461.0">
+                    <Label text="Monday" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Label>
+                    <Label text="Tuesday" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Label>
+                    <Label text="Wednesday" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Label>
+                    <Label text="Thursday" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Label>
+                    <Label text="Friday" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Label>
+
+                    <Label text="8:00 AM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Label>
+                    <Label text="9:00 AM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Label>
+                    <Label text="10:00 AM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Label>
+                    <Label text="11:00 AM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Label>
+                    <Label text="12:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Label>
+                    <Label text="1:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Label>
+                    <Label text="2:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Label>
+                    <Label text="3:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Label>
+                    <Label text="4:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="9">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Label>
+                    <Label text="5:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="10">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Label>
+                    <Label text="6:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="11">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Label>
+                    <Label text="7:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="12">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Label>
+                    <Label text="8:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="13">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Label>
+                    <Label text="9:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="14">
+                        <font>
+                            <Font name="System Bold" size="14.0" />
+                        </font>
+                    </Label>
+                    <Label text="Course A" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                    <Label text="Course B" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                  <columnConstraints>
+                     <ColumnConstraints prefWidth="76.83" />
+                     <ColumnConstraints prefWidth="76.83" />
+                     <ColumnConstraints prefWidth="76.83" />
+                     <ColumnConstraints prefWidth="76.83" />
+                     <ColumnConstraints prefWidth="76.83" />
+                     <ColumnConstraints prefWidth="76.83" />
+                  </columnConstraints>
+                  <rowConstraints>
+                     <RowConstraints prefHeight="31.93" />
+                     <RowConstraints prefHeight="31.93" />
+                     <RowConstraints prefHeight="31.93" />
+                     <RowConstraints prefHeight="31.93" />
+                     <RowConstraints prefHeight="31.93" />
+                     <RowConstraints prefHeight="31.93" />
+                     <RowConstraints prefHeight="31.93" />
+                     <RowConstraints prefHeight="31.93" />
+                     <RowConstraints prefHeight="31.93" />
+                     <RowConstraints prefHeight="31.93" />
+                     <RowConstraints prefHeight="31.93" />
+                     <RowConstraints prefHeight="31.93" />
+                     <RowConstraints prefHeight="31.93" />
+                     <RowConstraints prefHeight="31.93" />
+                     <RowConstraints prefHeight="31.93" />
+                  </rowConstraints>
+                </GridPane>
             </children>
             </AnchorPane>
             <AnchorPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
@@ -71,6 +190,16 @@
                     <ChoiceBox fx:id="majorField" layoutX="19.0" layoutY="74.0" prefHeight="25.0" prefWidth="116.0" />
                     <Label layoutX="48.0" layoutY="99.0" prefHeight="17.0" prefWidth="58.0" text="Select Year" />
                     <ChoiceBox fx:id="yearField" layoutX="19.0" layoutY="116.0" prefHeight="25.0" prefWidth="116.0" />
+               <ScrollPane layoutX="6.0" layoutY="401.0" prefHeight="72.0" prefWidth="139.0">
+                 <content>
+                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="72.0" prefWidth="148.0">
+                        <children>
+                           <HBox prefHeight="72.0" prefWidth="148.0" />
+                        </children></AnchorPane>
+                 </content>
+               </ScrollPane>
+               <Label layoutX="32.0" layoutY="383.0" text="Saved Schedules:" />
+               <Button fx:id="reccSearchButton" layoutX="50.0" layoutY="160.0" mnemonicParsing="false" text="Search" />
                 </children>
             </AnchorPane>
         </items>

@@ -56,8 +56,9 @@ public class MainController implements Initializable {
     @FXML
     private ListView<String> searchResults;
     private Schedule currSchedule = new Schedule(); // TODO: WHEN CHANGE SCHED_NAME currSchedule.setName(to_update_value)
-    private ArrayList<String> schedules;
-    private String currentSchedule;
+    //private ArrayList<String> schedules;
+    private User curUser = new User();
+    private String currentSchedule = "";
     @FXML
     private TextField scheduleName;
     private String nameOfSchedule;
@@ -279,15 +280,20 @@ public class MainController implements Initializable {
 
     @FXML
     public void saveSchedule(ActionEvent action) {
-        //TODO: save current schedule
-
         if (nameOfSchedule.equals("")) {
-            //TODO: please enter name for your scheudle and try again
+            //TODO: please enter name for your schedule and try again
+        } else {
+            // Set Schedule name
+            currSchedule.setScheduleName(nameOfSchedule);
+            // Saves the schedule in the txt
+            currSchedule.saveSchedule(curUser);
+            // Clear scheduleList
+            scheduleList.getItems().clear();
+            // Repopulate scheduleList
+            for (Schedule s : curUser.getSavedSchedules()){
+                scheduleList.getItems().addAll(s.getScheduleName());
+            }
         }
-
-        //TODO: call shcedule class and put into the txt file
-
-
     }
 
     @FXML
@@ -343,21 +349,27 @@ public class MainController implements Initializable {
         startField.getItems().addAll(times);
         endField.getItems().addAll(times);
 
-        String filePath = "src/SavedSchedules.txt";
+        curUser.loadSavedSchedules();
 
-        schedules = new ArrayList<>();
+//        String filePath = "src/SavedSchedules.txt";
+//
+//        schedules = new ArrayList<>();
+//
+//        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+//            String line;
+//            while ((line = br.readLine()) != null) {
+//                String[] parts = line.split("\\s+");
+//                schedules.add(parts[0]);
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split("\\s+");
-                schedules.add(parts[0]);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        for (Schedule s : curUser.getSavedSchedules()){
+            scheduleList.getItems().addAll(s.getScheduleName());
         }
 
-        scheduleList.getItems().addAll(schedules);
+        //scheduleList.getItems().addAll(schedules);
         scheduleList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {

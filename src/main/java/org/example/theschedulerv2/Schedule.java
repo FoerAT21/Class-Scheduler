@@ -29,6 +29,12 @@ public class Schedule {
         classesInSchedule = new ArrayList<>();
     }
 
+    public Schedule(String scheduleName){
+        this.scheduleName = scheduleName;
+        numCredits = 0;
+        classesInSchedule = new ArrayList<>();
+    }
+
     // Getter for scheduleName
     public String getScheduleName() {
         return scheduleName;
@@ -52,23 +58,25 @@ public class Schedule {
     // if found, create class object and check for conflicts in current using the Class.hasConflict
     // Returns false if there is a conflict, true if not.
     public boolean addCourse(int index){
-        ArrayList<Class> courseToAdd = database.get(index);
+        //ArrayList<Class> courseToAdd = database.get(index);
+        Class courseToAdd = Search.getClassByID(index);
 
-        for(Class c : this.classesInSchedule){
-            for(Class x : courseToAdd){
-//                if(c.hasConflict(x)) {
-//                    System.out.println(x.getCourseName() + " cannot be added because it conflicts with " + c.getCourseName() + ".");
-//                    return false;
-//                }
-            }
+//        for(Class c : this.classesInSchedule){
+//            if(c.hasConflict(courseToAdd)) {
+//                System.out.println(courseToAdd.getCourseName() + " cannot be added because it conflicts with " + c.getCourseName() + ".");
+//                return false;
+//            }
+//        }
+        if (courseToAdd != null) {
+            int classCredits = courseToAdd.getNumCredits();
+            numCredits += classCredits;
+
+            // Add the course to the list of classes in the schedule
+            classesInSchedule.add(courseToAdd);
+            return true;
+        } else {
+            return false;
         }
-
-//        int classCredits = courseToAdd.get(0).getNumCredits();
-//        numCredits += classCredits;
-
-        // Add the course to the list of classes in the schedule
-        classesInSchedule.addAll(courseToAdd);
-        return true;
     }
 
     public void removeCourse(int index){
@@ -150,10 +158,10 @@ public class Schedule {
 
             // Saving the schedule in newFile
             pw.write(this.scheduleName + ",");
-//            for (java.lang.Class c : classesInSchedule) {
-//                pw.write(c.getIndexInDB() + ",");
-//                pw.flush();
-//            }
+            for (Class c : classesInSchedule) {
+                pw.write(c.getIndexInDB() + ",");
+                pw.flush();
+            }
 
             // Write a new line
             pw.write("\n");
@@ -184,7 +192,7 @@ public class Schedule {
      * @param major : major of the recommended schedule to display
      * @throws IOException
      */
-    public void showRecSchedule(String major) throws IOException {
+    public static String retRecSchedule(String major) throws IOException {
         // Formats the pathname to the necessary PDF file based on major
         String pathName = "src/Recommended_Schedules/" + major + ".txt";
 
@@ -196,11 +204,14 @@ public class Schedule {
 
         // Declaring a string variable
         String st;
+        StringBuilder toRet = new StringBuilder();
 
         // Loop until end of file is reached
         while ((st = br.readLine()) != null)
-            // Print the string
-            System.out.println(st);
+            // Append to toRet
+            toRet.append(st).append("\n");
+
+        return toRet.toString();
     }
 
     @Override

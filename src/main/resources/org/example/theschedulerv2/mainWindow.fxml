@@ -9,6 +9,7 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -16,6 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.TextFlow?>
 
 <VBox alignment="CENTER" prefHeight="673.0" prefWidth="821.0" spacing="20.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.theschedulerv2.MainController">
     <padding>
@@ -191,14 +193,12 @@
                                             <Font name="System Bold" size="18.0" />
                                         </font>
                                     </Label>
-                                    <Label layoutX="44.0" layoutY="57.0" text="Select Major" />
-                                    <ChoiceBox fx:id="majorField" layoutX="19.0" layoutY="74.0" prefHeight="25.0" prefWidth="116.0" />
-                                    <Label layoutX="48.0" layoutY="99.0" prefHeight="17.0" prefWidth="58.0" text="Select Year" />
-                                    <ChoiceBox fx:id="yearField" layoutX="19.0" layoutY="116.0" prefHeight="25.0" prefWidth="116.0" />
+                                    <Label layoutX="44.0" layoutY="67.0" text="Select Major" />
+                                    <ChoiceBox fx:id="majorField" layoutX="19.0" layoutY="89.0" prefHeight="25.0" prefWidth="116.0" />
                                     <Label layoutX="32.0" layoutY="383.0" text="Saved Schedules:" />
-                                    <Button fx:id="reccSearchButton" layoutX="50.0" layoutY="160.0" mnemonicParsing="false" text="Search" />
+                                    <Button fx:id="reccSearchButton" layoutX="52.0" layoutY="126.0" mnemonicParsing="false" onAction="#openRecSchedule" text="Search" />
                                     <ListView fx:id="scheduleList" layoutX="3.0" layoutY="400.0" prefHeight="121.0" prefWidth="173.0" AnchorPane.bottomAnchor="0.6666666666666714" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.3333333333333144" AnchorPane.topAnchor="400.0" />
-                                    <Button layoutX="13.0" layoutY="210.0" mnemonicParsing="false" onAction="#saveSchedule" prefHeight="41.0" prefWidth="112.0" text="Save Schedule" AnchorPane.bottomAnchor="228.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="210.0" />
+                                    <Button layoutX="23.0" layoutY="210.0" mnemonicParsing="false" onAction="#saveSchedule" prefHeight="41.0" prefWidth="112.0" text="Save Schedule" AnchorPane.bottomAnchor="228.0" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="18.333333333333343" AnchorPane.topAnchor="210.0" />
                                 </children>
                             </AnchorPane>
                         </items>
@@ -213,7 +213,17 @@
                   </children></AnchorPane>
                 </content>
             </Tab>
+         <Tab fx:id="recTab" text="Recommended Schedules">
+           <content>
+             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                     <TextArea fx:id="recText" prefHeight="540.0" prefWidth="779.0" />
+                  </children>
+               </AnchorPane>
+           </content>
+         </Tab>
         </tabs>
     </TabPane>
+   <TextFlow prefHeight="200.0" prefWidth="200.0" />
     <TextField fx:id="scheduleName" alignment="CENTER" onAction="#nameTheSchedule" prefHeight="25.0" prefWidth="575.0" promptText="Enter Schedule Name" />
 </VBox>

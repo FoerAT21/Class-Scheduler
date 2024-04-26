@@ -233,25 +233,10 @@ public class MainController implements Initializable {
                 end = null;
             }
 
-            System.out.println(name);
-            System.out.println(department);
-            System.out.println(instructor);
-            System.out.println(code);
-            System.out.println(start);
-            System.out.println(end);
-            System.out.println(day);
-
             courseList = Search.search(
                     department, code, null, name, null,
                     day, start, end, instructor
             );
-
-            for(Class c : courseList)
-                System.out.println(c);
-
-//            CourseListController clc = new CourseListController(classes);
-
-
 
             try {
                 Parent child = FXMLLoader.load(getClass().getResource("courseWindow.fxml"));
@@ -292,6 +277,8 @@ public class MainController implements Initializable {
         //TODO: get schedule with that name from txt file and view it
 
     }
+
+
 
     @FXML
     public void nameTheSchedule(ActionEvent action) {

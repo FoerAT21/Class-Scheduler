@@ -50,8 +50,6 @@ public class MainController implements Initializable {
     @FXML
     private CheckBox FridayBox;
     @FXML
-    private ChoiceBox<String> yearField;
-    @FXML
     private ChoiceBox<String> majorField;
     @FXML
     private ListView<String> scheduleList;
@@ -342,7 +340,6 @@ public class MainController implements Initializable {
         departmentField.getItems().addAll(departmentList);
         instructorField.getItems().addAll(instructorList);
         majorField.getItems().addAll(majorList);
-        yearField.getItems().addAll(yearList);
         startField.getItems().addAll(times);
         endField.getItems().addAll(times);
 

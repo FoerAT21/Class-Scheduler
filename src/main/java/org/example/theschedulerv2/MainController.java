@@ -50,15 +50,15 @@ public class MainController implements Initializable {
     @FXML
     private CheckBox FridayBox;
     @FXML
-    private ChoiceBox<String> yearField;
-    @FXML
     private ChoiceBox<String> majorField;
     @FXML
     private ListView<String> scheduleList;
     @FXML
     private ListView<String> searchResults;
-    private ArrayList<String> schedules;
-    private String currentSchedule;
+    private Schedule currSchedule = new Schedule(); // TODO: WHEN CHANGE SCHED_NAME currSchedule.setName(to_update_value)
+    //private ArrayList<String> schedules;
+    private User curUser = new User();
+    private String currentSchedule = "";
     @FXML
     private TextField scheduleName;
     private String nameOfSchedule;
@@ -68,6 +68,10 @@ public class MainController implements Initializable {
     private Tab scheduleTab;
     @FXML
     private Tab coursesTab;
+    @FXML
+    private Tab recTab;
+    @FXML
+    private TextArea recText;
 
     private String[] times = {"none", "800", "900", "1000", "1100", "1200", "1300", "1400", "1500", "1600",
                                 "1700", "1800", "1900", "2000", "2100", "2200"};
@@ -137,6 +141,8 @@ public class MainController implements Initializable {
             "Wolfe, Britton", "Wolfe, Daniel", "Wolinski, Jeffrey", "Wong, Ven Ney",
             "Wood, Darren", "Young, M", "Yowler, Brian", "Zhang, Youhui"};
 
+    private String[] majorList = {"Accounting"};
+
     String name;
     String department;
     String instructor;
@@ -147,7 +153,7 @@ public class MainController implements Initializable {
     String major;
     String year;
     private Stage stage;
-    public static ArrayList<Class> courseList;
+    private ArrayList<Class> courseList;
     private String classToAdd;
 
     // MainWindow Search Button: Collects all the filter variables and opens courseWindow
@@ -274,15 +280,20 @@ public class MainController implements Initializable {
 
     @FXML
     public void saveSchedule(ActionEvent action) {
-        //TODO: save current schedule
-
         if (nameOfSchedule.equals("")) {
-            //TODO: please enter name for your scheudle and try again
+            //TODO: please enter name for your schedule and try again
+        } else {
+            // Set Schedule name
+            currSchedule.setScheduleName(nameOfSchedule);
+            // Saves the schedule in the txt
+            currSchedule.saveSchedule(curUser);
+            // Clear scheduleList
+            scheduleList.getItems().clear();
+            // Repopulate scheduleList
+            for (Schedule s : curUser.getSavedSchedules()){
+                scheduleList.getItems().addAll(s.getScheduleName());
+            }
         }
-
-        //TODO: call shcedule class and put into the txt file
-
-
     }
 
     @FXML
@@ -292,6 +303,30 @@ public class MainController implements Initializable {
 
         //TODO: get schedule with that name from txt file and view it
 
+    }
+
+    @FXML
+    public void openRecSchedule(ActionEvent action) throws IOException {
+        System.out.println("called openRecSchedule");
+        String major;
+        if (!Objects.equals(majorField.getValue(), "")) {
+            major = majorField.getValue();
+
+            // Allows user to take out value
+            if(major != null && major.equals("none")) {
+                majorField.setValue("");
+                major = null;
+            }
+
+        } else {
+            major = null;
+        }
+        System.out.println("Major: " + major);
+        String recSchedule = Schedule.retRecSchedule(major);
+
+        tab.getSelectionModel().select(recTab);
+        System.out.println(recSchedule);
+        recText.setText(recSchedule);
     }
 
 
@@ -310,26 +345,31 @@ public class MainController implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         departmentField.getItems().addAll(departmentList);
         instructorField.getItems().addAll(instructorList);
-        majorField.getItems().addAll(departmentList);
-        yearField.getItems().addAll(yearList);
+        majorField.getItems().addAll(majorList);
         startField.getItems().addAll(times);
         endField.getItems().addAll(times);
 
-        String filePath = "src/SavedSchedules.txt";
+        curUser.loadSavedSchedules();
 
-        schedules = new ArrayList<>();
+//        String filePath = "src/SavedSchedules.txt";
+//
+//        schedules = new ArrayList<>();
+//
+//        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+//            String line;
+//            while ((line = br.readLine()) != null) {
+//                String[] parts = line.split("\\s+");
+//                schedules.add(parts[0]);
+//            }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-            String line;
-            while ((line = br.readLine()) != null) {
-                String[] parts = line.split("\\s+");
-                schedules.add(parts[0]);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        for (Schedule s : curUser.getSavedSchedules()){
+            scheduleList.getItems().addAll(s.getScheduleName());
         }
 
-        scheduleList.getItems().addAll(schedules);
+        //scheduleList.getItems().addAll(schedules);
         scheduleList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
@@ -343,9 +383,27 @@ public class MainController implements Initializable {
                 // Listen for double click events on the selected item
                 searchResults.setOnMouseClicked(mouseEvent -> {
                     if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
+
                         // Handle double-click action here
                         classToAdd = newValue; // Assuming classToAdd is a field in your class
                         System.out.println(classToAdd);
+
+                        Class c = new Class(classToAdd);
+
+                        boolean hasConflict = false;
+                        for(Class cTemp : currSchedule.getClassesInSchedule()){
+                            if(c.hasConflict(cTemp)) hasConflict = true;
+                        }
+
+                        if(hasConflict){
+                            // TODO JADEN DEAL WITH IT
+                            // TODO Give text message saying has conflict
+                        }else{
+                            // TODO JADEN DEAL WITH IT
+                            // TODO ARE YOU SURE YOU WANT TO ADD? Y/N
+
+                        }
+
                         // Add your logic to add the selected class to the schedule
                     }
                 });

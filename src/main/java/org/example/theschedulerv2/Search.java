@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Search {
+    private ArrayList<Class> searchResults;
+
 //    public static void main(String[] args) {
 //        // Used to test search method
 //        ArrayList<Class> classes = search("COMP", null, null, null, null, null, "900", "1115",null);

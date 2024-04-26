@@ -4,20 +4,25 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Schedule {
-    private ArrayList<ArrayList<java.lang.Class>> database;
+    private ArrayList<ArrayList<Class>> database;
     private String scheduleName;
-    private ArrayList<java.lang.Class> classesInSchedule;
+    private ArrayList<Class> classesInSchedule;
     private int numCredits;
 
 
-    public Schedule(ArrayList<ArrayList<java.lang.Class>> db){
+    public Schedule(){
+        this.scheduleName = "";
+        this.numCredits = 0;
+        this.classesInSchedule = new ArrayList<>();
+    }
+    public Schedule(ArrayList<ArrayList<Class>> db){
         this.database = db;
         this.scheduleName = "";
         this.numCredits = 0;
         this.classesInSchedule = new ArrayList<>();
     }
 
-    public Schedule(ArrayList<ArrayList<java.lang.Class>> db, String scheduleName){
+    public Schedule(ArrayList<ArrayList<Class>> db, String scheduleName){
         this.database = db;
         this.scheduleName = scheduleName;
         numCredits = 0;
@@ -47,10 +52,10 @@ public class Schedule {
     // if found, create class object and check for conflicts in current using the Class.hasConflict
     // Returns false if there is a conflict, true if not.
     public boolean addCourse(int index){
-        ArrayList<java.lang.Class> courseToAdd = database.get(index);
+        ArrayList<Class> courseToAdd = database.get(index);
 
-        for(java.lang.Class c : this.classesInSchedule){
-            for(java.lang.Class x : courseToAdd){
+        for(Class c : this.classesInSchedule){
+            for(Class x : courseToAdd){
 //                if(c.hasConflict(x)) {
 //                    System.out.println(x.getCourseName() + " cannot be added because it conflicts with " + c.getCourseName() + ".");
 //                    return false;
@@ -214,7 +219,7 @@ public class Schedule {
         return sb.toString();
     }
 
-    public ArrayList<java.lang.Class> getClassesInSchedule(){
+    public ArrayList<Class> getClassesInSchedule(){
         return classesInSchedule;
     }
 

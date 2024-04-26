@@ -57,6 +57,7 @@ public class MainController implements Initializable {
     private ListView<String> scheduleList;
     @FXML
     private ListView<String> searchResults;
+    private Schedule currSchedule = new Schedule(); // TODO: WHEN CHANGE SCHED_NAME currSchedule.setName(to_update_value)
     private ArrayList<String> schedules;
     private String currentSchedule;
     @FXML
@@ -147,7 +148,7 @@ public class MainController implements Initializable {
     String major;
     String year;
     private Stage stage;
-    public static ArrayList<Class> courseList;
+    private ArrayList<Class> courseList;
     private String classToAdd;
 
     // MainWindow Search Button: Collects all the filter variables and opens courseWindow
@@ -344,25 +345,31 @@ public class MainController implements Initializable {
                 // Listen for double click events on the selected item
                 searchResults.setOnMouseClicked(mouseEvent -> {
                     if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
+
                         // Handle double-click action here
                         classToAdd = newValue; // Assuming classToAdd is a field in your class
                         System.out.println(classToAdd);
+
+                        Class c = new Class(classToAdd);
+
+                        boolean hasConflict = false;
+                        for(Class cTemp : currSchedule.getClassesInSchedule()){
+                            if(c.hasConflict(cTemp)) hasConflict = true;
+                        }
+
+                        if(hasConflict){
+                            // TODO JADEN DEAL WITH IT
+                            // TODO Give text message saying has conflict
+                        }else{
+                            // TODO JADEN DEAL WITH IT
+                            // TODO ARE YOU SURE YOU WANT TO ADD? Y/N
+
+                        }
+
                         // Add your logic to add the selected class to the schedule
                     }
                 });
             }
         });
-//        searchResults.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-//            @Override
-//            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-//                    //TODO: add class to shcedule
-//                if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-//                    if(mouseEvent.getClickCount() == 2){
-//                        classToAdd = searchResults.getSelectionModel().getSelectedItem();
-//                        System.out.println(classToAdd);                    }
-//                }
-//
-//            }
-//        });
     }
 }

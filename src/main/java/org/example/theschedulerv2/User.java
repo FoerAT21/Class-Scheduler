@@ -41,7 +41,7 @@ public class User {
         }
         return null; // Schedule not found
     }
-    public void loadSavedSchedules(ArrayList<ArrayList<java.lang.Class>> database)
+    public void loadSavedSchedules(ArrayList<ArrayList<Class>> database)
     {
         try {
             // Load SavedSchedules.txt

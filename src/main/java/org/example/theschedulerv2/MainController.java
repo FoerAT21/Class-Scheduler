@@ -338,7 +338,6 @@ public class MainController implements Initializable {
             }
         });
 
-
         searchResults.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 // Listen for double click events on the selected item
@@ -352,17 +351,5 @@ public class MainController implements Initializable {
                 });
             }
         });
-//        searchResults.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-//            @Override
-//            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-//                    //TODO: add class to shcedule
-//                if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-//                    if(mouseEvent.getClickCount() == 2){
-//                        classToAdd = searchResults.getSelectionModel().getSelectedItem();
-//                        System.out.println(classToAdd);                    }
-//                }
-//
-//            }
-//        });
     }
 }

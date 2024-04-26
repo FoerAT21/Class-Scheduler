@@ -150,7 +150,7 @@ public class Schedule {
 
             // Saving the schedule in newFile
             pw.write(this.scheduleName + ",");
-//            for (java.lang.Class c : classesInSchedule) {
+//            for (Class c : classesInSchedule) {
 //                pw.write(c.getIndexInDB() + ",");
 //                pw.flush();
 //            }
@@ -184,7 +184,7 @@ public class Schedule {
      * @param major : major of the recommended schedule to display
      * @throws IOException
      */
-    public void showRecSchedule(String major) throws IOException {
+    public static String retRecSchedule(String major) throws IOException {
         // Formats the pathname to the necessary PDF file based on major
         String pathName = "src/Recommended_Schedules/" + major + ".txt";
 
@@ -196,11 +196,14 @@ public class Schedule {
 
         // Declaring a string variable
         String st;
+        StringBuilder toRet = new StringBuilder();
 
         // Loop until end of file is reached
         while ((st = br.readLine()) != null)
-            // Print the string
-            System.out.println(st);
+            // Append to toRet
+            toRet.append(st).append("\n");
+
+        return toRet.toString();
     }
 
     @Override

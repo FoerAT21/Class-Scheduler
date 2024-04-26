@@ -69,6 +69,10 @@ public class MainController implements Initializable {
     private Tab scheduleTab;
     @FXML
     private Tab coursesTab;
+    @FXML
+    private Tab recTab;
+    @FXML
+    private TextArea recText;
 
     private String[] times = {"none", "800", "900", "1000", "1100", "1200", "1300", "1400", "1500", "1600",
                                 "1700", "1800", "1900", "2000", "2100", "2200"};
@@ -137,6 +141,8 @@ public class MainController implements Initializable {
             "Weber, Brent", "Welton, Gary", "West, Ryan", "Wise, Scott",
             "Wolfe, Britton", "Wolfe, Daniel", "Wolinski, Jeffrey", "Wong, Ven Ney",
             "Wood, Darren", "Young, M", "Yowler, Brian", "Zhang, Youhui"};
+
+    private String[] majorList = {"Accounting"};
 
     String name;
     String department;
@@ -295,6 +301,30 @@ public class MainController implements Initializable {
 
     }
 
+    @FXML
+    public void openRecSchedule(ActionEvent action) throws IOException {
+        System.out.println("called openRecSchedule");
+        String major;
+        if (!Objects.equals(majorField.getValue(), "")) {
+            major = majorField.getValue();
+
+            // Allows user to take out value
+            if(major != null && major.equals("none")) {
+                majorField.setValue("");
+                major = null;
+            }
+
+        } else {
+            major = null;
+        }
+        System.out.println("Major: " + major);
+        String recSchedule = Schedule.retRecSchedule(major);
+
+        tab.getSelectionModel().select(recTab);
+        System.out.println(recSchedule);
+        recText.setText(recSchedule);
+    }
+
 
 
     @FXML
@@ -311,7 +341,7 @@ public class MainController implements Initializable {
     public void initialize(URL arg0, ResourceBundle arg1) {
         departmentField.getItems().addAll(departmentList);
         instructorField.getItems().addAll(instructorList);
-        majorField.getItems().addAll(departmentList);
+        majorField.getItems().addAll(majorList);
         yearField.getItems().addAll(yearList);
         startField.getItems().addAll(times);
         endField.getItems().addAll(times);

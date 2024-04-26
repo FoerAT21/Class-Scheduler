@@ -18,7 +18,7 @@ public class Class {
 
     public Class(String courseID, String courseName, int numCredits,
                  String daysOfWeek, int beginTime, int endTime,
-                 String instructor, String department) {
+                 String instructor, String department, int indexInDB) {
         this.courseID = courseID;
         this.courseName = courseName;
         this.numCredits = numCredits;
@@ -27,7 +27,7 @@ public class Class {
         this.endTime = endTime;
         this.instructor = instructor;
         this.department = department;
-        int indexInDB = -1;
+        this.indexInDB = indexInDB;
     }
 
     public int getIndexInDB() {

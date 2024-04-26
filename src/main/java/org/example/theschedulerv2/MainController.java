@@ -54,11 +54,19 @@ public class MainController implements Initializable {
     private ChoiceBox<String> majorField;
     @FXML
     private ListView<String> scheduleList;
+    @FXML
+    private ListView<String> searchResults;
     private ArrayList<String> schedules;
     private String currentSchedule;
     @FXML
     private TextField scheduleName;
     private String nameOfSchedule;
+    @FXML
+    private TabPane tab;
+    @FXML
+    private Tab scheduleTab;
+    @FXML
+    private Tab coursesTab;
 
     private String[] times = {"none", "800", "900", "1000", "1100", "1200", "1300", "1400", "1500", "1600",
                                 "1700", "1800", "1900", "2000", "2100", "2200"};
@@ -139,6 +147,7 @@ public class MainController implements Initializable {
     String year;
     private Stage stage;
     public static ArrayList<Class> courseList;
+    private String classToAdd;
 
     // MainWindow Search Button: Collects all the filter variables and opens courseWindow
     @FXML
@@ -238,18 +247,24 @@ public class MainController implements Initializable {
                     day, start, end, instructor
             );
 
-            try {
-                Parent child = FXMLLoader.load(getClass().getResource("courseWindow.fxml"));
-                Scene scene = new Scene(child, 320, 240);
-                stage = new Stage(StageStyle.DECORATED);
-                stage.setTitle("Second Window!");
-                stage.initModality(Modality.APPLICATION_MODAL);
-                stage.setScene(scene);
-
-                stage.showAndWait();
-            } catch (Exception e) {
-                System.out.println("Search Error: " + e);
+            tab.getSelectionModel().select(coursesTab);
+            for(Class c : courseList){
+                searchResults.getItems().add(c.toString());
             }
+
+
+//            try {
+//                Parent child = FXMLLoader.load(getClass().getResource("courseWindow.fxml"));
+//                Scene scene = new Scene(child, 320, 240);
+//                stage = new Stage(StageStyle.DECORATED);
+//                stage.setTitle("Second Window!");
+//                stage.initModality(Modality.APPLICATION_MODAL);
+//                stage.setScene(scene);
+//
+//                stage.showAndWait();
+//            } catch (Exception e) {
+//                System.out.println("Search Error: " + e);
+//            }
 
         } catch (Exception e) {
             System.out.println("Exception Message: " + e);
@@ -319,6 +334,17 @@ public class MainController implements Initializable {
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                 currentSchedule = scheduleList.getSelectionModel().getSelectedItem();
                 System.out.println(currentSchedule);
+            }
+        });
+
+
+
+        searchResults.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+                    //TODO: add class to shcedule
+                classToAdd = searchResults.getSelectionModel().getSelectedItem();
+                System.out.println(classToAdd);
             }
         });
     }

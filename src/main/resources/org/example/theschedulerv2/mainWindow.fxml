@@ -21,196 +21,199 @@
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
-   <TabPane prefHeight="1000.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
-     <tabs>
-       <Tab text="Untitled Tab 1">
-            <content>
-                <SplitPane dividerPositions="0.2, 0.8" prefHeight="481.0" prefWidth="781.0">
-                    <items>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="158.0" prefWidth="521.0" VBox.vgrow="ALWAYS">
-                            <children>
-                                <TextField fx:id="nameField" layoutX="23.0" layoutY="62.0" prefHeight="25.0" prefWidth="116.0" />
-            
-                                                                          <Label fx:id="welcomeText" layoutX="21.0" layoutY="8.0" text="Filter Options">
-                                    <font>
-                                        <Font name="System Bold" size="18.0" />
-                                    </font>
-                                </Label>
-                                <Label layoutX="45.0" layoutY="45.0" text="Course Name" />
-                                <Label layoutX="49.0" layoutY="87.0" text="Department" />
-                                <ChoiceBox fx:id="departmentField" layoutX="21.0" layoutY="104.0" prefHeight="25.0" prefWidth="116.0" />
-                                <Label layoutX="56.0" layoutY="129.0" text="Instructor" />
-                                <ChoiceBox fx:id="instructorField" layoutX="19.0" layoutY="146.0" prefHeight="25.0" prefWidth="116.0" />
-                                <Label layoutX="47.0" layoutY="171.0" text="Course Code" />
-                                <TextField fx:id="codeField" layoutX="21.0" layoutY="188.0" prefHeight="25.0" prefWidth="116.0" />
-                                <Label layoutX="18.0" layoutY="231.0" text="Start Time" />
-                                <Label layoutX="88.0" layoutY="231.0" text="End Time" textAlignment="CENTER" />
-                                <CheckBox fx:id="MondayBox" layoutX="47.0" layoutY="282.0" mnemonicParsing="false" text="Monday" />
-                                <CheckBox fx:id="TuesdayBox" layoutX="47.0" layoutY="308.0" mnemonicParsing="false" text="Tuesday" />
-                                <CheckBox fx:id="WednesdayBox" layoutX="47.0" layoutY="332.0" mnemonicParsing="false" text="Wednesday" />
-                                <CheckBox fx:id="ThursdayBox" layoutX="47.0" layoutY="357.0" mnemonicParsing="false" text="Thursday" />
-                                <CheckBox fx:id="FridayBox" layoutX="47.0" layoutY="380.0" mnemonicParsing="false" text="Friday" />
-                                <Button fx:id="courseSearchButton" layoutX="34.0" layoutY="424.0" mnemonicParsing="false" onAction="#search" prefHeight="25.0" prefWidth="91.0" text="Search" />
-                           <ChoiceBox fx:id="startField" layoutX="14.0" layoutY="248.0" prefHeight="25.0" prefWidth="58.0" />
-                           <ChoiceBox fx:id="endField" layoutX="78.0" layoutY="248.0" prefHeight="25.0" prefWidth="58.0" />
-                            </children>
-                        </AnchorPane>
-                        <AnchorPane VBox.vgrow="ALWAYS">
-                        <children>
-                            <GridPane prefHeight="479.0" prefWidth="461.0">
-                                <Label text="Monday" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label text="Tuesday" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label text="Wednesday" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="0">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label text="Thursday" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="0">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label text="Friday" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="0">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Label>
-            
-                                                                          <Label text="8:00 AM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label text="9:00 AM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label text="10:00 AM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label text="11:00 AM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label text="12:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="5">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label text="1:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="6">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label text="2:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="7">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label text="3:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="8">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label text="4:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="9">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label text="5:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="10">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label text="6:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="11">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label text="7:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="12">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label text="8:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="13">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label text="9:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="14">
-                                    <font>
-                                        <Font name="System Bold" size="14.0" />
-                                    </font>
-                                </Label>
-                                <Label text="Course A" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                                <Label text="Course B" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-                              <columnConstraints>
-                                 <ColumnConstraints prefWidth="76.83" />
-                                 <ColumnConstraints prefWidth="76.83" />
-                                 <ColumnConstraints prefWidth="76.83" />
-                                 <ColumnConstraints prefWidth="76.83" />
-                                 <ColumnConstraints prefWidth="76.83" />
-                                 <ColumnConstraints prefWidth="76.83" />
-                              </columnConstraints>
-                              <rowConstraints>
-                                 <RowConstraints prefHeight="31.93" />
-                                 <RowConstraints prefHeight="31.93" />
-                                 <RowConstraints prefHeight="31.93" />
-                                 <RowConstraints prefHeight="31.93" />
-                                 <RowConstraints prefHeight="31.93" />
-                                 <RowConstraints prefHeight="31.93" />
-                                 <RowConstraints prefHeight="31.93" />
-                                 <RowConstraints prefHeight="31.93" />
-                                 <RowConstraints prefHeight="31.93" />
-                                 <RowConstraints prefHeight="31.93" />
-                                 <RowConstraints prefHeight="31.93" />
-                                 <RowConstraints prefHeight="31.93" />
-                                 <RowConstraints prefHeight="31.93" />
-                                 <RowConstraints prefHeight="31.93" />
-                                 <RowConstraints prefHeight="31.93" />
-                              </rowConstraints>
-                            </GridPane>
-                        </children>
-                        </AnchorPane>
-                        <AnchorPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-                            <children>
-                                <Label fx:id="welcomeText1" layoutX="7.0" layoutY="-6.0" prefHeight="72.0" prefWidth="139.0" text="Recommended Schedules" textAlignment="CENTER" wrapText="true">
-                                    <font>
-                                        <Font name="System Bold" size="18.0" />
-                                    </font>
-                                </Label>
-                                <Label layoutX="44.0" layoutY="57.0" text="Select Major" />
-                                <ChoiceBox fx:id="majorField" layoutX="19.0" layoutY="74.0" prefHeight="25.0" prefWidth="116.0" />
-                                <Label layoutX="48.0" layoutY="99.0" prefHeight="17.0" prefWidth="58.0" text="Select Year" />
-                                <ChoiceBox fx:id="yearField" layoutX="19.0" layoutY="116.0" prefHeight="25.0" prefWidth="116.0" />
-                           <Label layoutX="32.0" layoutY="383.0" text="Saved Schedules:" />
-                           <Button fx:id="reccSearchButton" layoutX="50.0" layoutY="160.0" mnemonicParsing="false" text="Search" />
-                           <ListView fx:id="scheduleList" layoutX="3.0" layoutY="400.0" prefHeight="121.0" prefWidth="173.0" AnchorPane.bottomAnchor="0.6666666666666714" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.3333333333333144" AnchorPane.topAnchor="400.0" />
-                           <Button layoutX="13.0" layoutY="210.0" mnemonicParsing="false" onAction="#saveSchedule" prefHeight="41.0" prefWidth="112.0" text="Save Schedule" AnchorPane.bottomAnchor="228.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="210.0" />
-                            </children>
-                        </AnchorPane>
-                    </items>
-                </SplitPane>
-            </content>
-       </Tab>
-       <Tab text="Untitled Tab 2">
-         <content>
-           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
-         </content>
-       </Tab>
-     </tabs>
-   </TabPane>
-   <TextField fx:id="scheduleName" alignment="CENTER" onAction="#nameTheSchedule" prefHeight="25.0" prefWidth="575.0" promptText="Enter Schedule Name" />
+    <TabPane fx:id="tab" prefHeight="1000.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+            <Tab fx:id="scheduleTab" text="Schedule">
+                <content>
+                    <SplitPane dividerPositions="0.2, 0.8" prefHeight="481.0" prefWidth="781.0">
+                        <items>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="158.0" prefWidth="521.0" VBox.vgrow="ALWAYS">
+                                <children>
+                                    <TextField fx:id="nameField" layoutX="23.0" layoutY="62.0" prefHeight="25.0" prefWidth="116.0" />
+
+                                    <Label fx:id="welcomeText" layoutX="21.0" layoutY="8.0" text="Filter Options">
+                                        <font>
+                                            <Font name="System Bold" size="18.0" />
+                                        </font>
+                                    </Label>
+                                    <Label layoutX="45.0" layoutY="45.0" text="Course Name" />
+                                    <Label layoutX="49.0" layoutY="87.0" text="Department" />
+                                    <ChoiceBox fx:id="departmentField" layoutX="21.0" layoutY="104.0" prefHeight="25.0" prefWidth="116.0" />
+                                    <Label layoutX="56.0" layoutY="129.0" text="Instructor" />
+                                    <ChoiceBox fx:id="instructorField" layoutX="19.0" layoutY="146.0" prefHeight="25.0" prefWidth="116.0" />
+                                    <Label layoutX="47.0" layoutY="171.0" text="Course Code" />
+                                    <TextField fx:id="codeField" layoutX="21.0" layoutY="188.0" prefHeight="25.0" prefWidth="116.0" />
+                                    <Label layoutX="18.0" layoutY="231.0" text="Start Time" />
+                                    <Label layoutX="88.0" layoutY="231.0" text="End Time" textAlignment="CENTER" />
+                                    <CheckBox fx:id="MondayBox" layoutX="47.0" layoutY="282.0" mnemonicParsing="false" text="Monday" />
+                                    <CheckBox fx:id="TuesdayBox" layoutX="47.0" layoutY="308.0" mnemonicParsing="false" text="Tuesday" />
+                                    <CheckBox fx:id="WednesdayBox" layoutX="47.0" layoutY="332.0" mnemonicParsing="false" text="Wednesday" />
+                                    <CheckBox fx:id="ThursdayBox" layoutX="47.0" layoutY="357.0" mnemonicParsing="false" text="Thursday" />
+                                    <CheckBox fx:id="FridayBox" layoutX="47.0" layoutY="380.0" mnemonicParsing="false" text="Friday" />
+                                    <Button fx:id="courseSearchButton" layoutX="34.0" layoutY="424.0" mnemonicParsing="false" onAction="#search" prefHeight="25.0" prefWidth="91.0" text="Search" />
+                                    <ChoiceBox fx:id="startField" layoutX="14.0" layoutY="248.0" prefHeight="25.0" prefWidth="58.0" />
+                                    <ChoiceBox fx:id="endField" layoutX="78.0" layoutY="248.0" prefHeight="25.0" prefWidth="58.0" />
+                                </children>
+                            </AnchorPane>
+                            <AnchorPane VBox.vgrow="ALWAYS">
+                                <children>
+                                    <GridPane prefHeight="479.0" prefWidth="461.0">
+                                        <Label text="Monday" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+                                            <font>
+                                                <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="Tuesday" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+                                            <font>
+                                                <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="Wednesday" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+                                            <font>
+                                                <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="Thursday" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+                                            <font>
+                                                <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="Friday" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="0">
+                                            <font>
+                                                <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+
+                                        <Label text="8:00 AM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="1">
+                                            <font>
+                                                <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="9:00 AM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                                            <font>
+                                                <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="10:00 AM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="3">
+                                            <font>
+                                                <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="11:00 AM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+                                            <font>
+                                                <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="12:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="5">
+                                            <font>
+                                                <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="1:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="6">
+                                            <font>
+                                                <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="2:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="7">
+                                            <font>
+                                                <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="3:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="8">
+                                            <font>
+                                                <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="4:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="9">
+                                            <font>
+                                                <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="5:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="10">
+                                            <font>
+                                                <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="6:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="11">
+                                            <font>
+                                                <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="7:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="12">
+                                            <font>
+                                                <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="8:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="13">
+                                            <font>
+                                                <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="9:00 PM" GridPane.columnIndex="0" GridPane.halignment="CENTER" GridPane.rowIndex="14">
+                                            <font>
+                                                <Font name="System Bold" size="14.0" />
+                                            </font>
+                                        </Label>
+                                        <Label text="Course A" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                                        <Label text="Course B" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+                                        <columnConstraints>
+                                            <ColumnConstraints prefWidth="76.83" />
+                                            <ColumnConstraints prefWidth="76.83" />
+                                            <ColumnConstraints prefWidth="76.83" />
+                                            <ColumnConstraints prefWidth="76.83" />
+                                            <ColumnConstraints prefWidth="76.83" />
+                                            <ColumnConstraints prefWidth="76.83" />
+                                        </columnConstraints>
+                                        <rowConstraints>
+                                            <RowConstraints prefHeight="31.93" />
+                                            <RowConstraints prefHeight="31.93" />
+                                            <RowConstraints prefHeight="31.93" />
+                                            <RowConstraints prefHeight="31.93" />
+                                            <RowConstraints prefHeight="31.93" />
+                                            <RowConstraints prefHeight="31.93" />
+                                            <RowConstraints prefHeight="31.93" />
+                                            <RowConstraints prefHeight="31.93" />
+                                            <RowConstraints prefHeight="31.93" />
+                                            <RowConstraints prefHeight="31.93" />
+                                            <RowConstraints prefHeight="31.93" />
+                                            <RowConstraints prefHeight="31.93" />
+                                            <RowConstraints prefHeight="31.93" />
+                                            <RowConstraints prefHeight="31.93" />
+                                            <RowConstraints prefHeight="31.93" />
+                                        </rowConstraints>
+                                    </GridPane>
+                                </children>
+                            </AnchorPane>
+                            <AnchorPane prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                <children>
+                                    <Label fx:id="welcomeText1" layoutX="7.0" layoutY="-6.0" prefHeight="72.0" prefWidth="139.0" text="Recommended Schedules" textAlignment="CENTER" wrapText="true">
+                                        <font>
+                                            <Font name="System Bold" size="18.0" />
+                                        </font>
+                                    </Label>
+                                    <Label layoutX="44.0" layoutY="57.0" text="Select Major" />
+                                    <ChoiceBox fx:id="majorField" layoutX="19.0" layoutY="74.0" prefHeight="25.0" prefWidth="116.0" />
+                                    <Label layoutX="48.0" layoutY="99.0" prefHeight="17.0" prefWidth="58.0" text="Select Year" />
+                                    <ChoiceBox fx:id="yearField" layoutX="19.0" layoutY="116.0" prefHeight="25.0" prefWidth="116.0" />
+                                    <Label layoutX="32.0" layoutY="383.0" text="Saved Schedules:" />
+                                    <Button fx:id="reccSearchButton" layoutX="50.0" layoutY="160.0" mnemonicParsing="false" text="Search" />
+                                    <ListView fx:id="scheduleList" layoutX="3.0" layoutY="400.0" prefHeight="121.0" prefWidth="173.0" AnchorPane.bottomAnchor="0.6666666666666714" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.3333333333333144" AnchorPane.topAnchor="400.0" />
+                                    <Button layoutX="13.0" layoutY="210.0" mnemonicParsing="false" onAction="#saveSchedule" prefHeight="41.0" prefWidth="112.0" text="Save Schedule" AnchorPane.bottomAnchor="228.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="28.0" AnchorPane.topAnchor="210.0" />
+                                </children>
+                            </AnchorPane>
+                        </items>
+                    </SplitPane>
+                </content>
+            </Tab>
+            <Tab fx:id="coursesTab" text="Search Results">
+                <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <children>
+                     <ListView fx:id="searchResults" prefHeight="401.0" prefWidth="492.0" />
+                  </children></AnchorPane>
+                </content>
+            </Tab>
+        </tabs>
+    </TabPane>
+    <TextField fx:id="scheduleName" alignment="CENTER" onAction="#nameTheSchedule" prefHeight="25.0" prefWidth="575.0" promptText="Enter Schedule Name" />
 </VBox>

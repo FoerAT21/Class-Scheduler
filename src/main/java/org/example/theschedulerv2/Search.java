@@ -7,15 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Search {
-    private ArrayList<Class> searchResults;
-
-//    public static void main(String[] args) {
-//        // Used to test search method
-//        ArrayList<Class> classes = search("COMP", null, null, null, null, null, "900", "1115",null);
-//        for (Class c : classes){
-//            System.out.println(c);
-//        }
-//    }
+    
 
     private static Connection connect() {
         // SQLite's connection string
@@ -81,7 +73,8 @@ public class Search {
                 int startTime = rs.getInt("startTime_int");
                 int endTime = rs.getInt("endTime_int");
                 String instructorName = rs.getString("professorName");
-                results.add(new Class(courseID, courseName, numCredits, daysOfWeek, startTime, endTime, instructorName, department));
+                int index = rs.getInt("id");
+                results.add(new Class(courseID, courseName, numCredits, daysOfWeek, startTime, endTime, instructorName, department, index));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -96,5 +89,54 @@ public class Search {
             }
         }
         return results;
+    }
+
+    public static Class getClassByID(int id) {
+        Connection conn = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        Class c = null;
+
+        try {
+            // Establishing the connection
+            conn = connect();
+
+            // Creating a statement
+            stmt = conn.createStatement();
+
+            // Executing a query
+            String query = "SELECT * FROM course WHERE id = " + id;
+            System.out.println(query);
+            rs = stmt.executeQuery(query);
+
+            // Processing the results
+            while (rs.next()) {
+                // Retrieve data from the result set
+                String department = rs.getString("department");
+                int courseNumber = rs.getInt("number");
+                String section = rs.getString("section");
+                String courseID = department + " " + courseNumber + " " + section;
+                String courseName = rs.getString("name");
+                int numCredits = rs.getInt("hours");
+                String daysOfWeek = rs.getString("weekday");
+                int startTime = rs.getInt("startTime_int");
+                int endTime = rs.getInt("endTime_int");
+                String instructorName = rs.getString("professorName");
+                int index = rs.getInt("id");
+                c = new Class(courseID, courseName, numCredits, daysOfWeek, startTime, endTime, instructorName, department, index);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Closing resources
+            try {
+                if (rs != null) rs.close();
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return c;
     }
 }

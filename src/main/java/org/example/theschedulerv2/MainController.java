@@ -10,6 +10,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -338,14 +339,30 @@ public class MainController implements Initializable {
         });
 
 
-
-        searchResults.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-            @Override
-            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-                    //TODO: add class to shcedule
-                classToAdd = searchResults.getSelectionModel().getSelectedItem();
-                System.out.println(classToAdd);
+        searchResults.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                // Listen for double click events on the selected item
+                searchResults.setOnMouseClicked(mouseEvent -> {
+                    if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
+                        // Handle double-click action here
+                        classToAdd = newValue; // Assuming classToAdd is a field in your class
+                        System.out.println(classToAdd);
+                        // Add your logic to add the selected class to the schedule
+                    }
+                });
             }
         });
+//        searchResults.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
+//            @Override
+//            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
+//                    //TODO: add class to shcedule
+//                if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+//                    if(mouseEvent.getClickCount() == 2){
+//                        classToAdd = searchResults.getSelectionModel().getSelectedItem();
+//                        System.out.println(classToAdd);                    }
+//                }
+//
+//            }
+//        });
     }
 }

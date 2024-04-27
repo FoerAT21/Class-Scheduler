@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -61,7 +62,7 @@ public class MainController implements Initializable {
     private String currentSchedule = "";
     @FXML
     private TextField scheduleName;
-    private String nameOfSchedule;
+    private String nameOfSchedule = "";
     @FXML
     private TabPane tab;
     @FXML
@@ -282,6 +283,11 @@ public class MainController implements Initializable {
     public void saveSchedule(ActionEvent action) {
         if (nameOfSchedule.equals("")) {
             //TODO: please enter name for your schedule and try again
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("WARNING");
+            alert.setContentText("Please Enter A Name For Your Schedule");
+            alert.setHeaderText("Warning Alert");
+            alert.showAndWait();
         } else {
             // Set Schedule name
             currSchedule.setScheduleName(nameOfSchedule);
@@ -329,17 +335,6 @@ public class MainController implements Initializable {
         recText.setText(recSchedule);
     }
 
-
-
-    @FXML
-    public void nameTheSchedule(ActionEvent action) {
-        nameOfSchedule = scheduleName.getText();
-//        System.out.println(nameOfSchedule);
-    }
-
-
-
-
     //Initializes all dropdown options in mainWindow with their expected options
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -378,7 +373,6 @@ public class MainController implements Initializable {
             }
         });
 
-
         searchResults.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 // Listen for double click events on the selected item
@@ -409,6 +403,11 @@ public class MainController implements Initializable {
                     }
                 });
             }
+        });
+
+        scheduleName.textProperty().addListener((observable, oldValue, newValue) -> {
+            // Update the nameOfSchedule variable whenever the text changes
+            nameOfSchedule = newValue;
         });
     }
 }

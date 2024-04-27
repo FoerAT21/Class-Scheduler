@@ -225,5 +225,5 @@
         </tabs>
     </TabPane>
    <TextFlow prefHeight="200.0" prefWidth="200.0" />
-    <TextField fx:id="scheduleName" alignment="CENTER" onAction="#nameTheSchedule" prefHeight="25.0" prefWidth="575.0" promptText="Enter Schedule Name" />
+    <TextField fx:id="scheduleName" alignment="CENTER" prefHeight="25.0" prefWidth="575.0" promptText="Enter Schedule Name" />
 </VBox>

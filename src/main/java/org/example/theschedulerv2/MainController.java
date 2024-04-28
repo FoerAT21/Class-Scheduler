@@ -1,30 +1,17 @@
 package org.example.theschedulerv2;
 
-import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
-import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Objects;
-import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.util.*;
 
 public class MainController implements Initializable {
 
@@ -57,7 +44,6 @@ public class MainController implements Initializable {
     @FXML
     private ListView<String> searchResults;
     private Schedule currSchedule = new Schedule(); // TODO: WHEN CHANGE SCHED_NAME currSchedule.setName(to_update_value)
-    //private ArrayList<String> schedules;
     private User curUser = new User();
     private String currentSchedule = "";
     @FXML
@@ -74,8 +60,11 @@ public class MainController implements Initializable {
     @FXML
     private TextArea recText;
     @FXML
+    private GridPane scheduleGridPane;
+    @FXML
     private Button modeSwitch;
     private Boolean isLight = true;
+
 
     private String[] times = {"none", "800", "900", "1000", "1100", "1200", "1300", "1400", "1500", "1600",
                                 "1700", "1800", "1900", "2000", "2100", "2200"};
@@ -158,7 +147,6 @@ public class MainController implements Initializable {
     String year;
     private Stage stage;
     private ArrayList<Class> courseList;
-    private String classToAdd;
 
     // MainWindow Search Button: Collects all the filter variables and opens courseWindow
     @FXML
@@ -263,20 +251,6 @@ public class MainController implements Initializable {
                 searchResults.getItems().add(c.toString());
             }
 
-
-//            try {
-//                Parent child = FXMLLoader.load(getClass().getResource("courseWindow.fxml"));
-//                Scene scene = new Scene(child, 320, 240);
-//                stage = new Stage(StageStyle.DECORATED);
-//                stage.setTitle("Second Window!");
-//                stage.initModality(Modality.APPLICATION_MODAL);
-//                stage.setScene(scene);
-//
-//                stage.showAndWait();
-//            } catch (Exception e) {
-//                System.out.println("Search Error: " + e);
-//            }
-
         } catch (Exception e) {
             System.out.println("Exception Message: " + e);
         }
@@ -285,7 +259,7 @@ public class MainController implements Initializable {
     @FXML
     public void saveSchedule(ActionEvent action) {
         if (nameOfSchedule.equals("")) {
-            //TODO: please enter name for your schedule and try again
+            // please enter name for your schedule and try again
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("WARNING");
             alert.setContentText("Please Enter A Name For Your Schedule");
@@ -376,20 +350,6 @@ public class MainController implements Initializable {
 
         curUser.loadSavedSchedules();
 
-//        String filePath = "src/SavedSchedules.txt";
-//
-//        schedules = new ArrayList<>();
-//
-//        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
-//            String line;
-//            while ((line = br.readLine()) != null) {
-//                String[] parts = line.split("\\s+");
-//                schedules.add(parts[0]);
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
         for (Schedule s : curUser.getSavedSchedules()){
             scheduleList.getItems().addAll(s.getScheduleName());
         }
@@ -405,39 +365,89 @@ public class MainController implements Initializable {
 
         searchResults.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
-                // Listen for double click events on the selected item
+                // listen for double click events on the selected item
                 searchResults.setOnMouseClicked(mouseEvent -> {
                     if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
-
-                        // Handle double-click action here
-                        classToAdd = newValue; // Assuming classToAdd is a field in your class
-                        System.out.println(classToAdd);
-
-                        Class c = new Class(classToAdd);
+                        Class c = new Class(searchResults.getSelectionModel().getSelectedItem());
 
                         boolean hasConflict = false;
                         for(Class cTemp : currSchedule.getClassesInSchedule()){
-                            if(c.hasConflict(cTemp)) hasConflict = true;
+                            if(c.hasConflict(cTemp)){
+                                hasConflict = true;
+                                break;
+                            }
                         }
 
-                        if(hasConflict){
-                            // TODO JADEN DEAL WITH IT
-                            // TODO Give text message saying has conflict
-                        }else{
-                            // TODO JADEN DEAL WITH IT
-                            // TODO ARE YOU SURE YOU WANT TO ADD? Y/N
-
+                        if(hasConflict)
+                        {
+                            Alert alert = new Alert(Alert.AlertType.WARNING);
+                            alert.setTitle("Class Conflict!");
+                            alert.setHeaderText("This class cannot be added due to a conflict");
+                            alert.showAndWait();
                         }
-
-                        // Add your logic to add the selected class to the schedule
+                        else{
+                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                            alert.setTitle("Confirm Class to Add");
+                            alert.setHeaderText("Are you sure you want to add this Class?");
+                            ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+                            ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+                            alert.getButtonTypes().setAll(yes,no);
+                            Optional<ButtonType> result = alert.showAndWait();
+                            if (result.isPresent() && result.get() == yes) {
+                                addToGridPane(c);
+                            }
+                        }
                     }
                 });
             }
         });
 
         scheduleName.textProperty().addListener((observable, oldValue, newValue) -> {
-            // Update the nameOfSchedule variable whenever the text changes
+            // update the nameOfSchedule variable whenever the text changes
             nameOfSchedule = newValue;
         });
+
+
+    }
+
+    private void addToGridPane(Class c) {
+        // parse the daysOfWeek string
+        String daysOfWeek = c.getDaysOfWeek();
+        // get start and end times of the class
+        int startTime = c.getBeginTime();
+        int endTime = c.getEndTime();
+
+        // map days to their corresponding column index in the grid pane
+        Map<Character, Integer> dayToColumn = new HashMap<>();
+        dayToColumn.put('M', 1);
+        dayToColumn.put('T', 2);
+        dayToColumn.put('W', 3);
+        dayToColumn.put('R', 4);
+        dayToColumn.put('F', 5);
+
+        // iterate over daysOfWeek string
+        for(int i = 0; i < daysOfWeek.length(); i++) {
+            char day = daysOfWeek.charAt(i);
+            // get corresponding column index for day
+            int columnIndex = dayToColumn.get(day);
+
+            // calculate row index based on start time
+            int rowIndex = (startTime - 800) / 100 + 1;
+
+            // add class to grid pane
+            String classInfo = c.getCourseName();
+            Label classLabel = new Label(classInfo);
+            classLabel.setStyle("-fx-background-color: lightblue; -fx-padding: 5px; -fx-border-radius: 10px; -fx-background-radius: 10px;");
+            GridPane.setRowIndex(classLabel, rowIndex);
+            GridPane.setColumnIndex(classLabel, columnIndex);
+            scheduleGridPane.getChildren().add(classLabel);
+
+            // Tooltip to display class details
+            Tooltip tooltip = new Tooltip("Course: " + c.getCourseName() + "\n" +
+                    "Instructor: " + c.getInstructor() + "\n" +
+                    "Time: " + startTime + " - " + endTime);
+            Tooltip.install(classLabel, tooltip);
+        }
+        tab.getSelectionModel().select(scheduleTab);
     }
 }

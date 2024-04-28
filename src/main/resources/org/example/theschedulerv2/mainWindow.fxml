@@ -59,7 +59,7 @@
                             </AnchorPane>
                             <AnchorPane VBox.vgrow="ALWAYS">
                                 <children>
-                                    <GridPane prefHeight="479.0" prefWidth="461.0">
+                                    <GridPane fx:id="scheduleGridPane" prefHeight="479.0" prefWidth="461.0">
                                         <Label text="Monday" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0">
                                             <font>
                                                 <Font name="System Bold" size="14.0" />
@@ -156,8 +156,6 @@
                                                 <Font name="System Bold" size="14.0" />
                                             </font>
                                         </Label>
-                                        <Label text="Course A" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-                                        <Label text="Course B" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
                                         <columnConstraints>
                                             <ColumnConstraints prefWidth="76.83" />
                                             <ColumnConstraints prefWidth="76.83" />

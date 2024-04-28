@@ -1,0 +1,27 @@
+.title-bar {
+    -fx-background-color: #303443;
+}
+
+.primary {
+    -fx-background-color: #202020;
+}
+
+.success {
+    -fx-background-color: #2a2a2a;
+}
+
+.btn-primary {
+    -fx-background-color: #3c3c3c;
+    -fx-text-fill: #ffff;
+}
+
+.btn-success {
+    -fx-border-radius: 50px;
+    -fx-background-color: #303134;
+    -fx-text-fill: #ffff;
+}
+
+.txt-primary {
+    -fx-font-family: "Popping";
+    -fx-text-fill: #ffff;
+}

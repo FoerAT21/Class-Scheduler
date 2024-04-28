@@ -73,6 +73,9 @@ public class MainController implements Initializable {
     private Tab recTab;
     @FXML
     private TextArea recText;
+    @FXML
+    private Button modeSwitch;
+    private Boolean isLight = true;
 
     private String[] times = {"none", "800", "900", "1000", "1100", "1200", "1300", "1400", "1500", "1600",
                                 "1700", "1800", "1900", "2000", "2100", "2200"};
@@ -333,6 +336,33 @@ public class MainController implements Initializable {
         tab.getSelectionModel().select(recTab);
         System.out.println(recSchedule);
         recText.setText(recSchedule);
+    }
+
+    @FXML
+    protected void onModeSwitch(ActionEvent action) {
+        System.out.println("Attempting to Switch Modes");
+        isLight = !isLight;
+
+        // Get the scene of the button
+        Scene scene = modeSwitch.getScene();
+
+        // Remove the previous stylesheet
+        scene.getStylesheets().clear();
+
+        // Add the new stylesheet based on the state
+        String newStylesheet = isLight ? "lightmode.css" : "darkmode.css";
+
+        if (isLight) {
+            modeSwitch.setText("Dark Mode");
+        } else {
+            modeSwitch.setText("Light Mode");
+        }
+
+        String resourcePath = "/org/example/theschedulerv2/" + newStylesheet;
+        String externalForm = getClass().getResource(resourcePath).toExternalForm();
+        scene.getStylesheets().add(externalForm);
+
+        System.out.println("New Stylesheet Added: " + newStylesheet);
     }
 
     //Initializes all dropdown options in mainWindow with their expected options

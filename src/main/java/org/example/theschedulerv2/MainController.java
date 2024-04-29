@@ -2,9 +2,11 @@ package org.example.theschedulerv2;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
@@ -248,8 +250,11 @@ public class MainController implements Initializable {
             );
 
             tab.getSelectionModel().select(coursesTab);
+            searchResults.getItems().clear();
             for(Class c : courseList){
                 searchResults.getItems().add(c.toString());
+                //Store indexInDB value with the item in the ListView
+                searchResults.getProperties().put(c.toString(), c.getIndexInDB());
             }
 
         } catch (Exception e) {
@@ -361,6 +366,23 @@ public class MainController implements Initializable {
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                 currentSchedule = scheduleList.getSelectionModel().getSelectedItem();
                 System.out.println(currentSchedule);
+                scheduleName.setText(currentSchedule);
+                currSchedule = curUser.getSchedule(currentSchedule);
+                // Create an iterator to safely remove elements
+                Iterator<Node> iterator = scheduleGridPane.getChildren().iterator();
+
+                // Iterate through the children of the GridPane
+                while (iterator.hasNext()) {
+                    Node node = iterator.next();
+                    // Check if the child is a label representing a class (based on ID or style class)
+                    if (node instanceof Label && ((Label) node).getStyleClass().contains("class-label")) {
+                        // Remove the class label from the GridPane
+                        iterator.remove(); // Use the iterator's remove method
+                    }
+                }
+                for (Class c : currSchedule.getClassesInSchedule()){
+                    addToGridPane(c);
+                }
             }
         });
 
@@ -369,7 +391,11 @@ public class MainController implements Initializable {
                 // listen for double click events on the selected item
                 searchResults.setOnMouseClicked(mouseEvent -> {
                     if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
-                        Class c = new Class(searchResults.getSelectionModel().getSelectedItem());
+                        String s = searchResults.getSelectionModel().getSelectedItem();
+                        Object indexInDBObject = searchResults.getProperties().get(s);
+                        int index = (int) indexInDBObject;
+                        //int index = Integer.parseInt((String) searchResults.getProperties().get(s));
+                        Class c = Search.getClassByID(index);
 
                         boolean hasConflict = false;
                         for(Class cTemp : currSchedule.getClassesInSchedule()){
@@ -387,6 +413,7 @@ public class MainController implements Initializable {
                             alert.showAndWait();
                         }
                         else{
+                            currSchedule.addCourse(c);
                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                             alert.setTitle("Confirm Class to Add");
                             alert.setHeaderText("Are you sure you want to add this Class?");
@@ -441,6 +468,7 @@ public class MainController implements Initializable {
             // add class to grid pane
             String classInfo = c.getCourseName();
             Label classLabel = new Label(classInfo);
+            classLabel.getStyleClass().add("class-label");
             classLabel.setStyle("-fx-background-color: lightblue; -fx-padding: 5px; -fx-border-radius: 10px; -fx-background-radius: 10px;");
             GridPane.setRowIndex(classLabel, rowIndex);
             GridPane.setColumnIndex(classLabel, columnIndex);

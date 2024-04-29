@@ -434,6 +434,9 @@ public class MainController implements Initializable {
 
             // calculate row index based on start time
             int rowIndex = (startTime - 800) / 100 + 1;
+            System.out.println("Start: " + startTime);
+            System.out.println("End: " + endTime);
+            System.out.println(rowIndex);
 
             // add class to grid pane
             String classInfo = c.getCourseName();

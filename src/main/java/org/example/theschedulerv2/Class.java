@@ -47,9 +47,11 @@ public class Class {
             overTime.useDelimiter(":");
 
             int hour = overTime.nextInt();
+            System.out.println("Hour: " + hour);
             int minute = overTime.nextInt();
+            System.out.println("Minute: " + minute);
 
-            if(amPM.equals("PM")){
+            if(amPM.equals("PM") || amPM.equals(" PM")){
                 if(hour != 12){
                     hour += 12;
                 }

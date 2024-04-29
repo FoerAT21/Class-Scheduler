@@ -5,6 +5,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
@@ -433,6 +434,9 @@ public class MainController implements Initializable {
 
             // calculate row index based on start time
             int rowIndex = (startTime - 800) / 100 + 1;
+            System.out.println("Start: " + startTime);
+            System.out.println("End: " + endTime);
+            System.out.println(rowIndex);
 
             // add class to grid pane
             String classInfo = c.getCourseName();

@@ -59,9 +59,8 @@
                             </AnchorPane>
                             <AnchorPane styleClass="success" VBox.vgrow="ALWAYS">
                                 <children>
-
                                     <GridPane fx:id="scheduleGridPane" prefHeight="479.0" prefWidth="461.0">
-                                        <Label styleClass="txt-primary" text="Monday" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0"
+                                        <Label styleClass="txt-primary" text="Monday" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="0">
                                             <font>
                                                 <Font name="System Bold" size="14.0" />
                                             </font>
@@ -223,7 +222,7 @@
          </Tab>
         </tabs>
     </TabPane>
-   <TextFlow prefHeight="200.0" prefWidth="200.0" />
+    <TextFlow prefHeight="200.0" prefWidth="200.0" />
     <TextField fx:id="scheduleName" alignment="CENTER" prefHeight="25.0" prefWidth="575.0" promptText="Enter Schedule Name" styleClass="btn-primary" />
-   <Button fx:id="modeSwitch" mnemonicParsing="false" onAction="#onModeSwitch" styleClass="btn-primary" text="Dark Mode" />
+    <Button fx:id="modeSwitch" mnemonicParsing="false" onAction="#onModeSwitch" styleClass="btn-primary" text="Dark Mode" />
 </VBox>

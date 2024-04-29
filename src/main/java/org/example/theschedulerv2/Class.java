@@ -124,7 +124,7 @@ public class Class {
     @Override
     public String toString() {
 
-        return courseID + " " + courseName + " " + numCredits + " "+ daysOfWeek + " " +
+        return indexInDB + ": " + courseID + " " + courseName + " " + numCredits + " "+ daysOfWeek + " " +
                 convertTime(beginTime) + "-" + convertTime(endTime) + " " + instructor;
     }
 

@@ -124,7 +124,7 @@ public class Class {
     @Override
     public String toString() {
 
-        return courseID + " " + courseName + " " + numCredits + " "+ daysOfWeek + " " +
+        return indexInDB + ": " + courseID + " " + courseName + " " + numCredits + " "+ daysOfWeek + " " +
                 convertTime(beginTime) + "-" + convertTime(endTime) + " " + instructor;
     }
 
@@ -171,7 +171,7 @@ public class Class {
         boolean sameDay = false;
         for(int i = 0; i < other.daysOfWeek.length(); i++){
             for(int j = 0; j < this.daysOfWeek.length(); j++){
-                if(daysOfWeek.charAt(i) == other.daysOfWeek.charAt(i)){
+                if(this.daysOfWeek.charAt(j) == other.daysOfWeek.charAt(i)){
                     sameDay = true;
                     break;
                 }

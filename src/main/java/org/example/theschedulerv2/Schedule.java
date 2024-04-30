@@ -54,6 +54,19 @@ public class Schedule {
         }
     }
 
+    public boolean addCourse(Class courseToAdd){
+        if (courseToAdd != null) {
+            int classCredits = courseToAdd.getNumCredits();
+            numCredits += classCredits;
+
+            // Add the course to the list of classes in the schedule
+            classesInSchedule.add(courseToAdd);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // this should look up the class in the db - if not found - exception
     // if found, create class object and check for conflicts in current using the Class.hasConflict
     // Returns false if there is a conflict, true if not.
@@ -79,21 +92,13 @@ public class Schedule {
         }
     }
 
-    public void removeCourse(int index){
-        // Check if the index is valid
-        if(index >= 0 && index < classesInSchedule.size())
-        {
-//            java.lang.Class courseToRemove = classesInSchedule.get(index);
-//            int classCredits = courseToRemove.getNumCredits();
-//            numCredits -= classCredits;
+    public void removeCourse(int indexInDB){
+        for (Class c : classesInSchedule) {
+            if (c.getIndexInDB() == indexInDB){
+                classesInSchedule.remove(c);
+            }
+        }
 
-            // Remove the course from the list of classes in the schedule
-            classesInSchedule.remove(index);
-        }
-        else
-        {
-            System.out.println("Invalid index. Course not removed.");
-        }
     }
 
     /**

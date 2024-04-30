@@ -1,13 +1,15 @@
 .title-bar {
-    -fx-background-color: #303443;
-}
-
-.primary {
     -fx-background-color: #202020;
 }
 
+.primary {
+    -fx-background-color: #333333;
+    -fx-text-fill: #FFFFFF;
+    -fx-font-weight: bold;
+}
+
 .success {
-    -fx-background-color: #2a2a2a;
+    -fx-background-color: #333333;
 }
 
 .btn-primary {
@@ -17,11 +19,11 @@
 
 .btn-success {
     -fx-border-radius: 50px;
-    -fx-background-color: #303134;
-    -fx-text-fill: #ffff;
+    -fx-background-color: #808080;
+    -fx-text-fill: #282821;
 }
 
 .txt-primary {
     -fx-font-family: "Popping";
-    -fx-text-fill: #ffff;
+    -fx-text-fill: #FFFFFF;
 }

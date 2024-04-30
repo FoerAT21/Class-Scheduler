@@ -434,8 +434,6 @@ public class MainController implements Initializable {
             // update the nameOfSchedule variable whenever the text changes
             nameOfSchedule = newValue;
         });
-
-
     }
 
     private void addToGridPane(Class c) {
@@ -469,7 +467,7 @@ public class MainController implements Initializable {
             String classInfo = c.getCourseName();
             Label classLabel = new Label(classInfo);
             classLabel.getStyleClass().add("class-label");
-            classLabel.setStyle("-fx-background-color: lightblue; -fx-padding: 5px; -fx-border-radius: 10px; -fx-background-radius: 10px;");
+            classLabel.setStyle("-fx-background-color: #8B0000; -fx-text-fill: #FFFFFF; -fx-padding: 5px; -fx-border-radius: 10px; -fx-background-radius: 10px;");
             GridPane.setRowIndex(classLabel, rowIndex);
             GridPane.setColumnIndex(classLabel, columnIndex);
             scheduleGridPane.getChildren().add(classLabel);

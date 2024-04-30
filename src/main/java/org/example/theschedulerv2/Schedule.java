@@ -92,16 +92,13 @@ public class Schedule {
         }
     }
 
-    public boolean removeCourse(int index){
-        if (index >= 0 && index < classesInSchedule.size()) {
-            // Remove the course from the list of classes in the schedule
-            classesInSchedule.remove(index);
-            return true;
+    public void removeCourse(int indexInDB){
+        for (Class c : classesInSchedule) {
+            if (c.getIndexInDB() == indexInDB){
+                classesInSchedule.remove(c);
+            }
         }
-        else
-        {
-            return false;
-        }
+
     }
 
     /**

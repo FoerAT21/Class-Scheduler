@@ -16,7 +16,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
-import javafx.scene.layout.Region;
 
 public class MainController implements Initializable {
 
@@ -278,11 +277,9 @@ public class MainController implements Initializable {
             currSchedule.setScheduleName(nameOfSchedule);
             // Saves the schedule in the txt
             currSchedule.saveSchedule(curUser);
-            // Clear scheduleList
-            scheduleList.getItems().clear();
             // Repopulate scheduleList
-            for (Schedule s : curUser.getSavedSchedules()){
-                scheduleList.getItems().addAll(s.getScheduleName());
+            if (!scheduleList.getItems().contains(currSchedule.getScheduleName())){
+                scheduleList.getItems().add(currSchedule.getScheduleName());
             }
         }
     }
@@ -483,6 +480,33 @@ public class MainController implements Initializable {
             classLabel.setPrefHeight(preferredHeight);
             classLabel.setMinHeight(Region.USE_PREF_SIZE);
             classLabel.setMaxHeight(Region.USE_PREF_SIZE);
+
+            classLabel.getProperties().put(classInfo, c.getIndexInDB());
+
+            // listen for double click events on the selected item
+            classLabel.setOnMouseClicked(mouseEvent -> {
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
+                    String labelText = classLabel.textProperty().get();
+                    Object indexObj = classLabel.getProperties().get(labelText);
+                    int index = (int) indexObj;
+                    System.out.println(index);
+                    currSchedule.removeCourse(index);
+                    // Create an iterator to safely remove elements
+                    Iterator<Node> iterator = scheduleGridPane.getChildren().iterator();
+
+                    // Iterate through the children of the GridPane
+                    while (iterator.hasNext()) {
+                        Node node = iterator.next();
+                        Object o = node.getProperties().getOrDefault(labelText, 0);
+                        int in = (int) o;
+                        // Check if the child is a label representing a class (based on ID or style class)
+                        if (node instanceof Label && in == index) {
+                            // Remove the class label from the GridPane
+                            iterator.remove(); // Use the iterator's remove method
+                        }
+                    }
+                }
+            });
 
             scheduleGridPane.getChildren().add(classLabel);
 

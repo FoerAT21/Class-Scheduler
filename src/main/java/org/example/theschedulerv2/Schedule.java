@@ -92,13 +92,16 @@ public class Schedule {
         }
     }
 
-    public void removeCourse(int indexInDB){
+    public boolean removeCourse(int indexInDB){
         for (Class c : classesInSchedule) {
             if (c.getIndexInDB() == indexInDB){
                 classesInSchedule.remove(c);
+                System.out.println("Class removed");
+                return true;
             }
         }
-
+        System.out.println("Class not found");
+        return false;
     }
 
     /**

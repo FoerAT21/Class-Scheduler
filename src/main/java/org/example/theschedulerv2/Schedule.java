@@ -92,21 +92,13 @@ public class Schedule {
         }
     }
 
-    public void removeCourse(int index){
-        // Check if the index is valid
-        if(index >= 0 && index < classesInSchedule.size())
-        {
-//            java.lang.Class courseToRemove = classesInSchedule.get(index);
-//            int classCredits = courseToRemove.getNumCredits();
-//            numCredits -= classCredits;
+    public void removeCourse(int indexInDB){
+        for (Class c : classesInSchedule) {
+            if (c.getIndexInDB() == indexInDB){
+                classesInSchedule.remove(c);
+            }
+        }
 
-            // Remove the course from the list of classes in the schedule
-            classesInSchedule.remove(index);
-        }
-        else
-        {
-            System.out.println("Invalid index. Course not removed.");
-        }
     }
 
     /**

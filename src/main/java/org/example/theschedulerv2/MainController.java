@@ -11,10 +11,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import javafx.scene.layout.Region;
 
 public class MainController implements Initializable {
 
@@ -452,24 +454,36 @@ public class MainController implements Initializable {
         dayToColumn.put('F', 5);
 
         // iterate over daysOfWeek string
-        for(int i = 0; i < daysOfWeek.length(); i++) {
+        for (int i = 0; i < daysOfWeek.length(); i++) {
             char day = daysOfWeek.charAt(i);
             // get corresponding column index for day
             int columnIndex = dayToColumn.get(day);
 
-            // calculate row index based on start time
-            int rowIndex = (startTime - 800) / 100 + 1;
-            System.out.println("Start: " + startTime);
-            System.out.println("End: " + endTime);
-            System.out.println(rowIndex);
+            // calculate start and end row index based on start and end times
+            int startRow = (startTime - 800) / 100 + 1;
+            int endRow = (endTime - 800) / 100 + 1;
+
+            // calculate rowspan based on duration
+            int rowspan = endRow - startRow + 1;
+
+            // calculate the portion of the last row the class occupies
+            double endFraction = (endTime % 100) / 60.0;
 
             // add class to grid pane
             String classInfo = c.getCourseName();
             Label classLabel = new Label(classInfo);
             classLabel.getStyleClass().add("class-label");
             classLabel.setStyle("-fx-background-color: #8B0000; -fx-text-fill: #FFFFFF; -fx-padding: 5px; -fx-border-radius: 10px; -fx-background-radius: 10px;");
-            GridPane.setRowIndex(classLabel, rowIndex);
             GridPane.setColumnIndex(classLabel, columnIndex);
+            GridPane.setRowIndex(classLabel, startRow);
+            GridPane.setRowSpan(classLabel, rowspan);
+
+            // calculate preferred height based on duration
+            double preferredHeight = 40.0 * (rowspan - 1 + endFraction); // Assuming each row corresponds to 40 pixels in height
+            classLabel.setPrefHeight(preferredHeight);
+            classLabel.setMinHeight(Region.USE_PREF_SIZE);
+            classLabel.setMaxHeight(Region.USE_PREF_SIZE);
+
             scheduleGridPane.getChildren().add(classLabel);
 
             // Tooltip to display class details

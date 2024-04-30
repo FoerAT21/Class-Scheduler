@@ -56,7 +56,7 @@
                                     <ChoiceBox fx:id="endField" layoutX="72.0" layoutY="316.0" prefHeight="25.0" prefWidth="58.0" styleClass="btn-success" />
                                 </children>
                             </AnchorPane>
-                            <AnchorPane styleClass="success" VBox.vgrow="ALWAYS">
+                            <AnchorPane styleClass="success" VBox.vgrow="ALWAYS" minHeight="0.0" minWidth="0.0" prefHeight="200.0" prefWidth="200.0">
                                 <children>
 
                                                 <GridPane fx:id="scheduleGridPane" prefHeight="584.0" prefWidth="463.0">

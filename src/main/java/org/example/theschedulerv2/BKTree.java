@@ -69,10 +69,10 @@ public class BKTree {
             Node temp = nodes.remove();
             int lev = levDistance(temp.word, word);
             if(lev <= THRESHOLD && lev != 0) {
-                if(lev == 2){
+                if(lev >= 2){
                     searchResults.add(temp.word);
                 }else{
-                    searchResults.addFirst(temp.word);
+                    searchResults.add(0,temp.word);
                 }
             }
 

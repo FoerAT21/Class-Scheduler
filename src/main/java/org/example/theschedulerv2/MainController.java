@@ -2,7 +2,6 @@ package org.example.theschedulerv2;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,6 +16,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import javafx.collections.FXCollections;
 
 public class MainController implements Initializable {
 
@@ -52,7 +52,7 @@ public class MainController implements Initializable {
     private ListView<String> scheduleList;
     @FXML
     private ListView<String> searchResults;
-    private Schedule currSchedule = new Schedule(); // TODO: WHEN CHANGE SCHED_NAME currSchedule.setName(to_update_value)
+    private Schedule currSchedule = new Schedule(); // WHEN CHANGE SCHED_NAME currSchedule.setName(to_update_value)
     private User curUser = new User();
     private String currentSchedule = "";
     @FXML
@@ -73,6 +73,9 @@ public class MainController implements Initializable {
     @FXML
     private Button modeSwitch;
     private Boolean isLight = true;
+    @FXML
+    private Label creditsLabel;
+    private int totalCredits = 0;
     private SmartSearch autoFill = new SmartSearch();
 
 
@@ -153,9 +156,6 @@ public class MainController implements Initializable {
     String start;
     String end;
     String day;
-    String major;
-    String year;
-    private Stage stage;
     private ArrayList<Class> courseList;
 
     // MainWindow Search Button: Collects all the filter variables and opens courseWindow
@@ -292,10 +292,10 @@ public class MainController implements Initializable {
 
     @FXML
     public void openSchedule(ActionEvent action) {
-        //TODO: open schedule
+        // open schedule
         scheduleName.setText(currentSchedule);
 
-        //TODO: get schedule with that name from txt file and view it
+        // get schedule with that name from txt file and view it
 
     }
 
@@ -387,6 +387,7 @@ public class MainController implements Initializable {
                 }
                 for (Class c : currSchedule.getClassesInSchedule()){
                     addToGridPane(c);
+                    addCredits(c.getNumCredits());
                 }
             }
         });
@@ -399,7 +400,6 @@ public class MainController implements Initializable {
                         String s = searchResults.getSelectionModel().getSelectedItem();
                         Object indexInDBObject = searchResults.getProperties().get(s);
                         int index = (int) indexInDBObject;
-                        //int index = Integer.parseInt((String) searchResults.getProperties().get(s));
                         Class c = Search.getClassByID(index);
 
                         boolean hasConflict = false;
@@ -428,6 +428,7 @@ public class MainController implements Initializable {
                             Optional<ButtonType> result = alert.showAndWait();
                             if (result.isPresent() && result.get() == yes) {
                                 addToGridPane(c);
+                                addCredits(c.getNumCredits());
                             }
                         }
                     }
@@ -440,6 +441,8 @@ public class MainController implements Initializable {
             nameOfSchedule = newValue;
         });
 
+        updateCreditsLabel();
+      
         nameField.textProperty().addListener((observable, oldValue, newValue)->{
             this.nameSuggestions.setVisible(false);
             this.nameSuggestions.getItems().clear();
@@ -594,20 +597,29 @@ public class MainController implements Initializable {
                     Object indexObj = classLabel.getProperties().get(labelText);
                     int index = (int) indexObj;
                     System.out.println(index);
-                    currSchedule.removeCourse(index);
-                    // Create an iterator to safely remove elements
-                    Iterator<Node> iterator = scheduleGridPane.getChildren().iterator();
-
-                    // Iterate through the children of the GridPane
-                    while (iterator.hasNext()) {
-                        Node node = iterator.next();
-                        Object o = node.getProperties().getOrDefault(labelText, 0);
-                        int in = (int) o;
-                        // Check if the child is a label representing a class (based on ID or style class)
-                        if (node instanceof Label && in == index) {
-                            // Remove the class label from the GridPane
-                            iterator.remove(); // Use the iterator's remove method
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Confirm Class Removal");
+                    alert.setHeaderText("Are you sure you want to remove this class?");
+                    ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+                    ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+                    alert.getButtonTypes().setAll(yes, no);
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.isPresent() && result.get() == yes) {
+                        currSchedule.removeCourse(index);
+                        // Create an iterator to safely remove elements
+                        Iterator<Node> iterator = scheduleGridPane.getChildren().iterator();
+                        // Iterate through the children of the GridPane
+                        while (iterator.hasNext()) {
+                            Node node = iterator.next();
+                            Object o = node.getProperties().getOrDefault(labelText, 0);
+                            int in = (int) o;
+                            // Check if the child is a label representing a class (based on ID or style class)
+                            if (node instanceof Label && in == index) {
+                                // Remove the class label from the GridPane
+                                iterator.remove(); // Use iterators remove method
+                            }
                         }
+                        removeCredits(c.getNumCredits());
                     }
                 }
             });
@@ -621,5 +633,22 @@ public class MainController implements Initializable {
             Tooltip.install(classLabel, tooltip);
         }
         tab.getSelectionModel().select(scheduleTab);
+    }
+
+    // Method to add credits
+    public void addCredits(int credits) {
+        totalCredits += credits;
+        updateCreditsLabel();
+    }
+
+    // Method to remove credits
+    public void removeCredits(int credits) {
+        totalCredits -= credits;
+        updateCreditsLabel();
+    }
+
+    // Method to update the credits label text
+    private void updateCreditsLabel() {
+        creditsLabel.setText("Total Credits: " + totalCredits);
     }
 }

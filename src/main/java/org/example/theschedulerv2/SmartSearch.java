@@ -3,16 +3,10 @@ package org.example.theschedulerv2;
 import java.util.ArrayList;
 
 public class SmartSearch {
-    private String idQueryWord;
-    private String nameQueryWord;
     private BKTree courseIDs;
     private BKTree courseNames;
 
-
-
     public SmartSearch() {
-        this.idQueryWord = "";
-        this.nameQueryWord = "";
 
         try{
             courseIDs = new BKTree("src/course_id_dict.txt",
@@ -32,28 +26,13 @@ public class SmartSearch {
         return this.courseIDs;
     }
 
-    public void setIdQueryWord(String queryWord){
-        this.idQueryWord = queryWord;
+
+    public ArrayList<String> idResults(String word){
+        return this.courseIDs.search(word);
     }
 
-    public void setNameQueryWord(String queryWord){
-        this.nameQueryWord = queryWord;
-    }
-
-    public String getIdQueryWord(){
-        return this.idQueryWord;
-    }
-
-    public String getNameQueryWord(){
-        return this.nameQueryWord;
-    }
-
-    public ArrayList<String> idResults(){
-        return this.courseIDs.search(this.idQueryWord);
-    }
-
-    public ArrayList<String> nameResults(){
-        return this.courseNames.search(this.nameQueryWord);
+    public ArrayList<String> nameResults(String word){
+        return this.courseNames.search(word);
     }
 
 

@@ -2,6 +2,7 @@ package org.example.theschedulerv2;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,17 +16,22 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import javafx.collections.FXCollections;
 
 public class MainController implements Initializable {
 
     @FXML
     private TextField nameField;
     @FXML
+    private ListView<String> nameSuggestions = new ListView<>();
+    @FXML
     private ChoiceBox<String> departmentField;
     @FXML
     private ChoiceBox<String> instructorField;
     @FXML
     private TextField codeField;
+    @FXML
+    private ListView<String> idSuggestions = new ListView<>();
     @FXML
     private ChoiceBox<String> startField;
     @FXML
@@ -70,6 +76,7 @@ public class MainController implements Initializable {
     @FXML
     private Label creditsLabel;
     private int totalCredits = 0;
+    private SmartSearch autoFill = new SmartSearch();
 
 
     private String[] times = {"none", "800", "900", "1000", "1100", "1200", "1300", "1400", "1500", "1600",
@@ -433,7 +440,106 @@ public class MainController implements Initializable {
             // update the nameOfSchedule variable whenever the text changes
             nameOfSchedule = newValue;
         });
+
         updateCreditsLabel();
+      
+        nameField.textProperty().addListener((observable, oldValue, newValue)->{
+            this.nameSuggestions.setVisible(false);
+            this.nameSuggestions.getItems().clear();
+
+            if(newValue.length() > oldValue.length()){
+                // Finding the word they are currently searching for
+                int index = 0;
+                for(int i = newValue.length()-1; i>=0; i--){
+                    if(newValue.charAt(i) == ' ') {
+                        index = i+1;
+                        break;
+                    }
+                }
+
+                String currWord = newValue.substring(index);
+                ArrayList<String> temp = new ArrayList<>();
+                if(!currWord.isEmpty()) {
+                    ArrayList<String> allSuggests = autoFill.nameResults(currWord);
+
+                    for (int i = 0; i < 3; i++) {
+                        if (i == allSuggests.size()) break;
+                        if (allSuggests.get(i).charAt(0) == currWord.charAt(0)) {
+                            temp.add(allSuggests.get(i));
+                        }
+                    }
+
+                    ObservableList<String> searchSuggests = FXCollections.observableList(temp);
+
+                    this.nameSuggestions.setItems(searchSuggests);
+                    this.nameSuggestions.setVisible(true);
+                }
+            }
+        });
+
+        nameSuggestions.setOnMouseClicked(event -> {
+            if(nameField.getText().contains(" ")){
+                int index = 0;
+                int length = nameField.getText().length();
+                if(length != 0){
+                    for(int i = length-1; i>=0; i--){
+                        if(nameField.getText().charAt(i) == ' '){
+                            index = i;
+                            break;
+                        }
+                    }
+                    nameField.setText(nameField.getText().substring(0,index)+
+                            " " + nameSuggestions.getSelectionModel().getSelectedItem());
+                }
+
+
+            }else
+                nameField.setText(nameSuggestions.getSelectionModel().getSelectedItem());
+
+
+            nameSuggestions.setVisible(false);
+        });
+
+        codeField.textProperty().addListener((observable, oldValue, newValue)->{
+            this.idSuggestions.setVisible(false);
+            this.idSuggestions.getItems().clear();
+
+            if(newValue.length() > oldValue.length()){
+
+                // Finding the word they are currently searching for
+                int index = 0;
+                for(int i = newValue.length()-1; i>=0; i--){
+                    if(newValue.charAt(i) == ' ') {
+                        index = i+1;
+                        break;
+                    }
+                }
+
+                String currWord = newValue.substring(index);
+                ArrayList<String> temp = new ArrayList<>();
+                ArrayList<String> allSuggests = autoFill.idResults(currWord);
+
+                for(int i = 0; i < 3; i++){
+                    if(i == allSuggests.size()) break;
+                    if(allSuggests.get(i).charAt(0) == currWord.charAt(0)){
+                        temp.add(allSuggests.get(i));
+                    }
+                }
+
+                ObservableList<String> searchSuggests = FXCollections.observableList(temp);
+
+                this.idSuggestions.setItems(searchSuggests);
+                if(!searchSuggests.isEmpty()){
+                    this.idSuggestions.setVisible(true);
+                }
+            }
+        });
+
+        idSuggestions.setOnMouseClicked(event -> {
+            // Replace text in the TextField with the selected suggestion
+            codeField.setText(idSuggestions.getSelectionModel().getSelectedItem());
+            idSuggestions.setVisible(false);
+        });
     }
 
     private void addToGridPane(Class c) {

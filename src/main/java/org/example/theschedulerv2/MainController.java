@@ -16,18 +16,22 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
-import javafx.scene.layout.Region;
+import javafx.collections.FXCollections;
 
 public class MainController implements Initializable {
 
     @FXML
     private TextField nameField;
     @FXML
+    private ListView<String> nameSuggestions = new ListView<>();
+    @FXML
     private ChoiceBox<String> departmentField;
     @FXML
     private ChoiceBox<String> instructorField;
     @FXML
     private TextField codeField;
+    @FXML
+    private ListView<String> idSuggestions = new ListView<>();
     @FXML
     private ChoiceBox<String> startField;
     @FXML
@@ -48,7 +52,7 @@ public class MainController implements Initializable {
     private ListView<String> scheduleList;
     @FXML
     private ListView<String> searchResults;
-    private Schedule currSchedule = new Schedule(); // TODO: WHEN CHANGE SCHED_NAME currSchedule.setName(to_update_value)
+    private Schedule currSchedule = new Schedule(); // WHEN CHANGE SCHED_NAME currSchedule.setName(to_update_value)
     private User curUser = new User();
     private String currentSchedule = "";
     @FXML
@@ -69,6 +73,10 @@ public class MainController implements Initializable {
     @FXML
     private Button modeSwitch;
     private Boolean isLight = true;
+    @FXML
+    private Label creditsLabel;
+    private int totalCredits = 0;
+    private SmartSearch autoFill = new SmartSearch();
 
 
     private String[] times = {"none", "800", "900", "1000", "1100", "1200", "1300", "1400", "1500", "1600",
@@ -148,9 +156,6 @@ public class MainController implements Initializable {
     String start;
     String end;
     String day;
-    String major;
-    String year;
-    private Stage stage;
     private ArrayList<Class> courseList;
 
     // MainWindow Search Button: Collects all the filter variables and opens courseWindow
@@ -278,21 +283,19 @@ public class MainController implements Initializable {
             currSchedule.setScheduleName(nameOfSchedule);
             // Saves the schedule in the txt
             currSchedule.saveSchedule(curUser);
-            // Clear scheduleList
-            scheduleList.getItems().clear();
             // Repopulate scheduleList
-            for (Schedule s : curUser.getSavedSchedules()){
-                scheduleList.getItems().addAll(s.getScheduleName());
+            if (!scheduleList.getItems().contains(currSchedule.getScheduleName())){
+                scheduleList.getItems().add(currSchedule.getScheduleName());
             }
         }
     }
 
     @FXML
     public void openSchedule(ActionEvent action) {
-        //TODO: open schedule
+        // open schedule
         scheduleName.setText(currentSchedule);
 
-        //TODO: get schedule with that name from txt file and view it
+        // get schedule with that name from txt file and view it
 
     }
 
@@ -384,6 +387,7 @@ public class MainController implements Initializable {
                 }
                 for (Class c : currSchedule.getClassesInSchedule()){
                     addToGridPane(c);
+                    addCredits(c.getNumCredits());
                 }
             }
         });
@@ -396,7 +400,6 @@ public class MainController implements Initializable {
                         String s = searchResults.getSelectionModel().getSelectedItem();
                         Object indexInDBObject = searchResults.getProperties().get(s);
                         int index = (int) indexInDBObject;
-                        //int index = Integer.parseInt((String) searchResults.getProperties().get(s));
                         Class c = Search.getClassByID(index);
 
                         boolean hasConflict = false;
@@ -425,6 +428,7 @@ public class MainController implements Initializable {
                             Optional<ButtonType> result = alert.showAndWait();
                             if (result.isPresent() && result.get() == yes) {
                                 addToGridPane(c);
+                                addCredits(c.getNumCredits());
                             }
                         }
                     }
@@ -435,6 +439,106 @@ public class MainController implements Initializable {
         scheduleName.textProperty().addListener((observable, oldValue, newValue) -> {
             // update the nameOfSchedule variable whenever the text changes
             nameOfSchedule = newValue;
+        });
+
+        updateCreditsLabel();
+      
+        nameField.textProperty().addListener((observable, oldValue, newValue)->{
+            this.nameSuggestions.setVisible(false);
+            this.nameSuggestions.getItems().clear();
+
+            if(newValue.length() > oldValue.length()){
+                // Finding the word they are currently searching for
+                int index = 0;
+                for(int i = newValue.length()-1; i>=0; i--){
+                    if(newValue.charAt(i) == ' ') {
+                        index = i+1;
+                        break;
+                    }
+                }
+
+                String currWord = newValue.substring(index);
+                ArrayList<String> temp = new ArrayList<>();
+                if(!currWord.isEmpty()) {
+                    ArrayList<String> allSuggests = autoFill.nameResults(currWord);
+
+                    for (int i = 0; i < 3; i++) {
+                        if (i == allSuggests.size()) break;
+                        if (allSuggests.get(i).charAt(0) == currWord.charAt(0)) {
+                            temp.add(allSuggests.get(i));
+                        }
+                    }
+
+                    ObservableList<String> searchSuggests = FXCollections.observableList(temp);
+
+                    this.nameSuggestions.setItems(searchSuggests);
+                    this.nameSuggestions.setVisible(true);
+                }
+            }
+        });
+
+        nameSuggestions.setOnMouseClicked(event -> {
+            if(nameField.getText().contains(" ")){
+                int index = 0;
+                int length = nameField.getText().length();
+                if(length != 0){
+                    for(int i = length-1; i>=0; i--){
+                        if(nameField.getText().charAt(i) == ' '){
+                            index = i;
+                            break;
+                        }
+                    }
+                    nameField.setText(nameField.getText().substring(0,index)+
+                            " " + nameSuggestions.getSelectionModel().getSelectedItem());
+                }
+
+
+            }else
+                nameField.setText(nameSuggestions.getSelectionModel().getSelectedItem());
+
+
+            nameSuggestions.setVisible(false);
+        });
+
+        codeField.textProperty().addListener((observable, oldValue, newValue)->{
+            this.idSuggestions.setVisible(false);
+            this.idSuggestions.getItems().clear();
+
+            if(newValue.length() > oldValue.length()){
+
+                // Finding the word they are currently searching for
+                int index = 0;
+                for(int i = newValue.length()-1; i>=0; i--){
+                    if(newValue.charAt(i) == ' ') {
+                        index = i+1;
+                        break;
+                    }
+                }
+
+                String currWord = newValue.substring(index);
+                ArrayList<String> temp = new ArrayList<>();
+                ArrayList<String> allSuggests = autoFill.idResults(currWord);
+
+                for(int i = 0; i < 3; i++){
+                    if(i == allSuggests.size()) break;
+                    if(allSuggests.get(i).charAt(0) == currWord.charAt(0)){
+                        temp.add(allSuggests.get(i));
+                    }
+                }
+
+                ObservableList<String> searchSuggests = FXCollections.observableList(temp);
+
+                this.idSuggestions.setItems(searchSuggests);
+                if(!searchSuggests.isEmpty()){
+                    this.idSuggestions.setVisible(true);
+                }
+            }
+        });
+
+        idSuggestions.setOnMouseClicked(event -> {
+            // Replace text in the TextField with the selected suggestion
+            codeField.setText(idSuggestions.getSelectionModel().getSelectedItem());
+            idSuggestions.setVisible(false);
         });
     }
 
@@ -484,6 +588,42 @@ public class MainController implements Initializable {
             classLabel.setMinHeight(Region.USE_PREF_SIZE);
             classLabel.setMaxHeight(Region.USE_PREF_SIZE);
 
+            classLabel.getProperties().put(classInfo, c.getIndexInDB());
+
+            // listen for double click events on the selected item
+            classLabel.setOnMouseClicked(mouseEvent -> {
+                if (mouseEvent.getButton().equals(MouseButton.PRIMARY) && mouseEvent.getClickCount() == 2) {
+                    String labelText = classLabel.textProperty().get();
+                    Object indexObj = classLabel.getProperties().get(labelText);
+                    int index = (int) indexObj;
+                    System.out.println(index);
+                    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert.setTitle("Confirm Class Removal");
+                    alert.setHeaderText("Are you sure you want to remove this class?");
+                    ButtonType yes = new ButtonType("Yes", ButtonBar.ButtonData.OK_DONE);
+                    ButtonType no = new ButtonType("No", ButtonBar.ButtonData.CANCEL_CLOSE);
+                    alert.getButtonTypes().setAll(yes, no);
+                    Optional<ButtonType> result = alert.showAndWait();
+                    if (result.isPresent() && result.get() == yes) {
+                        currSchedule.removeCourse(index);
+                        // Create an iterator to safely remove elements
+                        Iterator<Node> iterator = scheduleGridPane.getChildren().iterator();
+                        // Iterate through the children of the GridPane
+                        while (iterator.hasNext()) {
+                            Node node = iterator.next();
+                            Object o = node.getProperties().getOrDefault(labelText, 0);
+                            int in = (int) o;
+                            // Check if the child is a label representing a class (based on ID or style class)
+                            if (node instanceof Label && in == index) {
+                                // Remove the class label from the GridPane
+                                iterator.remove(); // Use iterators remove method
+                            }
+                        }
+                        removeCredits(c.getNumCredits());
+                    }
+                }
+            });
+
             scheduleGridPane.getChildren().add(classLabel);
 
             // Tooltip to display class details
@@ -493,5 +633,22 @@ public class MainController implements Initializable {
             Tooltip.install(classLabel, tooltip);
         }
         tab.getSelectionModel().select(scheduleTab);
+    }
+
+    // Method to add credits
+    public void addCredits(int credits) {
+        totalCredits += credits;
+        updateCreditsLabel();
+    }
+
+    // Method to remove credits
+    public void removeCredits(int credits) {
+        totalCredits -= credits;
+        updateCreditsLabel();
+    }
+
+    // Method to update the credits label text
+    private void updateCreditsLabel() {
+        creditsLabel.setText("Total Credits: " + totalCredits);
     }
 }

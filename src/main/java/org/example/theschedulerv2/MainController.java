@@ -227,24 +227,50 @@ public class MainController implements Initializable {
                 code = null;
             }
             if (startField.getValue() != null && !startField.getValue().isEmpty()) {
-                start = startField.getValue();
-
                 // Allows user to take out value
+                start = startField.getValue();
                 if(start != null && start.equals("none")){
                     startField.setValue("");
                     start = null;
+                }else{
+                    boolean isPM = false;
+
+                    if(start.endsWith("PM")) isPM = true;
+
+                    Scanner overTime = new Scanner(start.substring(0,start.indexOf(" ")));
+                    overTime.useDelimiter(":");
+                    int hour = overTime.nextInt();
+                    int minute = overTime.nextInt();
+                    if(isPM && hour != 12){
+                        start = "" + (((hour+12)*100) + minute);
+                    }else{
+                        start = "" + ((hour*100)+minute);
+                    }
                 }
             } else {
                 start = null;
             }
 
             if (endField.getValue() != null && !endField.getValue().isEmpty()) {
-                end = endField.getValue();
-
                 // Allows user to take out value
+                end = endField.getValue();
                 if(end != null && end.equals("none")){
                     endField.setValue("");
                     end = null;
+                }else{
+                    boolean isPM = false;
+
+                    if(end.endsWith("PM")) isPM = true;
+
+                    Scanner overTime = new Scanner(end.substring(0,end.indexOf(" ")));
+                    overTime.useDelimiter(":");
+                    int hour = overTime.nextInt();
+                    int minute = overTime.nextInt();
+                    if(isPM && hour != 12){
+                        end = "" + (((hour+12)*100) + minute);
+                    }else{
+                        end = "" + ((hour*100)+minute);
+                    }
                 }
             } else {
                 end = null;

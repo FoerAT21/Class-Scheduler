@@ -17,12 +17,10 @@
     -fx-background-color: #FFFFFF;
     -fx-text-fill: #282821;
     -fx-border-color: #808080;
-    -fx-padding: 1rem 2rem;
 }
 
 .btn-success{
     -fx-border-color: #808080;
-    -fx-padding: 1rem 2rem;
     -fx-background-color: #FFFFFF;
     -fx-text-fill: #282821;
 }

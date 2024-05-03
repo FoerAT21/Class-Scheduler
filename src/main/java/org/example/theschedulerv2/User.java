@@ -71,8 +71,4 @@ public class User {
             System.err.println("An error occurred while loading saved schedules: " + e.getMessage());
         }
     }
-
-    public void deleteSchedule(String scheduleName){
-
-    }
 }

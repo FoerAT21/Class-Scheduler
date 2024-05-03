@@ -257,6 +257,12 @@
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
                                         <TextArea fx:id="recText" layoutX="198.0" prefHeight="590.0" prefWidth="693.0" styleClass=".text-area.content" />
+                                 <Label layoutX="21.0" layoutY="25.0" text="Reccomended Schedule">
+                                    <font>
+                                       <Font name="System Bold" size="14.0" />
+                                    </font>
+                                 </Label>
+                                 <Label fx:id="majorLabel" layoutX="21.0" layoutY="61.0" text="Major: " />
                                     </children>
                                 </AnchorPane>
                             </content>

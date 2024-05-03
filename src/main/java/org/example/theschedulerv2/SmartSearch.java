@@ -18,15 +18,6 @@ public class SmartSearch {
         }
     }
 
-    public BKTree getCourseNames(){
-        return this.courseNames;
-    }
-
-    public BKTree getCourseIDs(){
-        return this.courseIDs;
-    }
-
-
     public ArrayList<String> idResults(String word){
         return this.courseIDs.search(word);
     }
@@ -34,6 +25,4 @@ public class SmartSearch {
     public ArrayList<String> nameResults(String word){
         return this.courseNames.search(word);
     }
-
-
 }

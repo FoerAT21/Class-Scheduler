@@ -1,9 +1,8 @@
 package org.example.theschedulerv2;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Class {
-    private String courseID; // eg COMP350A -- will be unique
+    private String courseID;
     private String courseName;
     private int numCredits;
     private String daysOfWeek;
@@ -13,63 +12,6 @@ public class Class {
 
     private String department;
     private int indexInDB;
-
-//    private String description;
-
-    public Class(String classToAdd){
-        Scanner scan = new Scanner(classToAdd);
-        this.department = scan.next();
-        String number = scan.next();
-        String section = scan.next();
-
-        String className = "";
-        while(!scan.hasNextInt()){
-            String temp = scan.next();
-            if(scan.hasNextInt()) className += temp;
-            else className += temp + " ";
-        }
-
-        this.courseName = className;
-
-        this.numCredits = scan.nextInt();
-        this.daysOfWeek = scan.next();
-
-
-        for(int i = 0; i<2; i++){
-            String time = scan.next();
-            if(i == 0) scan.useDelimiter("-");
-            String amPM = scan.next();
-            scan.useDelimiter(" ");
-            System.out.println("HERE " +amPM);
-            if(time.startsWith("-")) time = time.substring(1);
-
-            Scanner overTime = new Scanner(time);
-            overTime.useDelimiter(":");
-
-            int hour = overTime.nextInt();
-            System.out.println("Hour: " + hour);
-            int minute = overTime.nextInt();
-            System.out.println("Minute: " + minute);
-
-            if(amPM.equals("PM") || amPM.equals(" PM")){
-                if(hour != 12){
-                    hour += 12;
-                }
-            }
-            hour*=100;
-
-            if(i == 0) this.beginTime = hour+minute;
-            else this.endTime = hour+minute;
-        }
-
-        String instructorName = "";
-
-        while(scan.hasNext()) instructorName += scan.next() + " ";
-
-        this.instructor = instructorName.stripTrailing();
-        this.courseID = department + " " + number + " " + section;
-        this.indexInDB = -1;
-    }
 
     public Class(String courseID, String courseName, int numCredits,
                  String daysOfWeek, int beginTime, int endTime,
@@ -87,10 +29,6 @@ public class Class {
 
     public int getIndexInDB() {
         return indexInDB;
-    }
-
-    public void setIndexInDB(int n){
-        indexInDB = n;
     }
 
     public int getNumCredits() {
@@ -111,14 +49,6 @@ public class Class {
 
     public String getDaysOfWeek(){
         return daysOfWeek;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public String getCourseID() {
-        return courseID;
     }
 
     @Override

@@ -27,3 +27,16 @@
     -fx-font-family: "Popping";
     -fx-text-fill: #FFFFFF;
 }
+
+.text-area.content {
+    -fx-text-alignment: left;
+}
+
+.list-view .list-cell:even {
+    -fx-background-color: #333333;
+    -fx-text-fill: #FFFFFF;
+}
+.list-view .list-cell:odd {
+    -fx-background-color: #383838;
+    -fx-text-fill: #FFFFFF;
+}

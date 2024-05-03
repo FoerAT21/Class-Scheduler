@@ -370,7 +370,7 @@ public class MainController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                 currentSchedule = scheduleList.getSelectionModel().getSelectedItem();
-                System.out.println(currentSchedule);
+                totalCredits = 0;
                 scheduleName.setText(currentSchedule);
                 currSchedule = curUser.getSchedule(currentSchedule);
                 // Create an iterator to safely remove elements

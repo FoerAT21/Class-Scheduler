@@ -381,6 +381,11 @@ public class MainController implements Initializable {
             }
         });
 
+        tab.setOnMouseClicked(mouseEvent -> {
+            if(nameSuggestions.isVisible()) nameSuggestions.setVisible(false);
+            if(idSuggestions.isVisible()) idSuggestions.setVisible(false);
+        });
+
         searchResults.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue != null) {
                 // listen for double click events on the selected item
@@ -436,7 +441,7 @@ public class MainController implements Initializable {
             this.nameSuggestions.setVisible(false);
             this.nameSuggestions.getItems().clear();
 
-            if(newValue.length() > oldValue.length()){
+            if(newValue.length() > oldValue.length() && newValue.length()>2){
                 // Finding the word they are currently searching for
                 int index = 0;
                 for(int i = newValue.length()-1; i>=0; i--){
@@ -461,7 +466,10 @@ public class MainController implements Initializable {
                     ObservableList<String> searchSuggests = FXCollections.observableList(temp);
 
                     this.nameSuggestions.setItems(searchSuggests);
-                    this.nameSuggestions.setVisible(true);
+                    this.nameSuggestions.toFront();
+
+                    if(!searchSuggests.isEmpty()) this.nameSuggestions.setVisible(true);
+
                 }
             }
         });
@@ -518,6 +526,7 @@ public class MainController implements Initializable {
                 ObservableList<String> searchSuggests = FXCollections.observableList(temp);
 
                 this.idSuggestions.setItems(searchSuggests);
+                this.idSuggestions.toFront();
                 if(!searchSuggests.isEmpty()){
                     this.idSuggestions.setVisible(true);
                 }

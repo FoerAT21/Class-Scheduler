@@ -85,7 +85,6 @@ public class BKTree {
             }
         }
 
-        System.out.println(searchResults);
         return searchResults;
     }
 

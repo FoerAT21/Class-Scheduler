@@ -18,7 +18,6 @@ public class Search {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        System.out.println("Successfully connected to database!");
         return conn;
     }
 
@@ -57,7 +56,6 @@ public class Search {
 
             // Executing a query
             String query = formatQuery(Department, CourseNumber, Section, CourseName, NumCredits, DaysOfWeek, StartTime, EndTime, InstructorName);
-            System.out.println(query);
             rs = stmt.executeQuery(query);
 
             // Processing the results
@@ -106,7 +104,7 @@ public class Search {
 
             // Executing a query
             String query = "SELECT * FROM course WHERE id = " + id;
-            System.out.println(query);
+
             rs = stmt.executeQuery(query);
 
             // Processing the results

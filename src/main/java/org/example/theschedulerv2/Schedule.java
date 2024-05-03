@@ -40,18 +40,8 @@ public class Schedule {
         return scheduleName;
     }
 
-    public int getNumCredits(){
-        return numCredits;
-    }
-
     public void setScheduleName(String name){
         this.scheduleName = name;
-    }
-
-    public void printForRemove(){
-        for(int i = 0; i < classesInSchedule.size(); i++){
-            System.out.println((i+1) + " " + classesInSchedule.get(i).toString());
-        }
     }
 
     public boolean addCourse(Class courseToAdd){
@@ -71,15 +61,8 @@ public class Schedule {
     // if found, create class object and check for conflicts in current using the Class.hasConflict
     // Returns false if there is a conflict, true if not.
     public boolean addCourse(int index){
-        //ArrayList<Class> courseToAdd = database.get(index);
         Class courseToAdd = Search.getClassByID(index);
 
-//        for(Class c : this.classesInSchedule){
-//            if(c.hasConflict(courseToAdd)) {
-//                System.out.println(courseToAdd.getCourseName() + " cannot be added because it conflicts with " + c.getCourseName() + ".");
-//                return false;
-//            }
-//        }
         if (courseToAdd != null) {
             int classCredits = courseToAdd.getNumCredits();
             numCredits += classCredits;
@@ -190,10 +173,6 @@ public class Schedule {
         }
     }
 
-    public void downloadSchedule(){
-
-    }
-
     /**
      * This method takes a GCC major as a String input and prints the recommended schedule
      * for that major to the console. It uses preformatted txt files in the Recommended_Schedules folder.
@@ -240,16 +219,5 @@ public class Schedule {
 
     public ArrayList<Class> getClassesInSchedule(){
         return classesInSchedule;
-    }
-
-    // for Console purposes -- just to see what is in Schedule for Sprint 1
-    public void printSchedule(){
-        int i = 1;
-//        for (java.lang.Class c : classesInSchedule){
-//            StringBuilder s = new StringBuilder();
-//            s.append("Course: ").append(i).append(": ").append(c.getCourseID()).append(" | ").append(c.getCourseName()).append(" | ").append(c.getInstructor()).append(" | ").append(c.getNumCredits()).append(" | ").append(c.getBeginTime()).append(" - ").append(c.getEndTime());
-//            System.out.println(s);
-//            i++;
-//        }
     }
 }

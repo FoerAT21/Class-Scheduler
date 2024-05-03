@@ -12,7 +12,6 @@ import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
-import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
@@ -52,7 +51,7 @@ public class MainController implements Initializable {
     private ListView<String> scheduleList;
     @FXML
     private ListView<String> searchResults;
-    private Schedule currSchedule = new Schedule(); // WHEN CHANGE SCHED_NAME currSchedule.setName(to_update_value)
+    private Schedule currSchedule = new Schedule();
     private User curUser = new User();
     private String currentSchedule = "";
     @FXML
@@ -81,8 +80,6 @@ public class MainController implements Initializable {
 
     private String[] times = {"none", "800", "900", "1000", "1100", "1200", "1300", "1400", "1500", "1600",
                                 "1700", "1800", "1900", "2000", "2100", "2200"};
-
-    private String[] yearList = {"Freshmen", "Sophomore", "Junior", "Senior"};
 
     private String[] departmentList = {"none", "ACCT", "ART", "ASTR", "BIOL", "CHEM",
             "CMIN", "COMM", "COMP", "DESI", "ECON", "EDUC", "ELEE", "ENGL", "ENGR",
@@ -291,15 +288,6 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    public void openSchedule(ActionEvent action) {
-        // open schedule
-        scheduleName.setText(currentSchedule);
-
-        // get schedule with that name from txt file and view it
-
-    }
-
-    @FXML
     public void openRecSchedule(ActionEvent action) throws IOException {
         System.out.println("called openRecSchedule");
         String major;
@@ -365,7 +353,6 @@ public class MainController implements Initializable {
             scheduleList.getItems().addAll(s.getScheduleName());
         }
 
-        //scheduleList.getItems().addAll(schedules);
         scheduleList.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {

@@ -76,6 +76,8 @@ public class MainController implements Initializable {
     private Label creditsLabel;
     private int totalCredits = 0;
     private SmartSearch autoFill = new SmartSearch();
+    @FXML
+    private Label majorLabel;
 
 
     private String[] times = {"none", "800", "900", "1000", "1100", "1200", "1300", "1400", "1500", "1600",
@@ -526,6 +528,14 @@ public class MainController implements Initializable {
             // Replace text in the TextField with the selected suggestion
             codeField.setText(idSuggestions.getSelectionModel().getSelectedItem());
             idSuggestions.setVisible(false);
+        });
+
+        majorField.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue != null) {
+                majorLabel.setText("Major: " + newValue);
+            } else {
+                majorLabel.setText("Major: ");
+            }
         });
     }
 

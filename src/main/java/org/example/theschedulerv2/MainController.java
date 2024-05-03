@@ -452,6 +452,7 @@ public class MainController implements Initializable {
                 }
 
                 String currWord = newValue.substring(index);
+                currWord = currWord.toUpperCase();
                 ArrayList<String> temp = new ArrayList<>();
                 if(!currWord.isEmpty()) {
                     ArrayList<String> allSuggests = autoFill.nameResults(currWord);

@@ -58,7 +58,7 @@ public class Class {
                 convertTime(beginTime) + "-" + convertTime(endTime) + " " + instructor;
     }
 
-    public String convertTime(int time){
+    public static String convertTime(int time){
         StringBuilder returnable = new StringBuilder();
         if(time<1200){
             returnable.append(time / 100);

@@ -44,9 +44,9 @@
                                                   <children>
                   
                                     
-                                                            <TextField fx:id="nameField" layoutX="20.0" layoutY="61.0" prefHeight="25.0" prefWidth="116.0" styleClass="btn-success" />
+                                                            <TextField fx:id="nameField" layoutX="27.0" layoutY="61.0" prefHeight="25.0" prefWidth="116.0" styleClass="btn-success" />
                   
-                                                                        <Label fx:id="welcomeText" layoutX="19.0" styleClass="txt-primary" text="Filter Options">
+                                                                        <Label fx:id="welcomeText" layoutX="26.0" styleClass="txt-primary" text="Filter Options">
                   
                                                                             <font>
                                                               <Font name="System Bold" size="18.0" />
@@ -56,24 +56,24 @@
                   
                                                                         <ListView fx:id="idSuggestions" layoutX="20.0" layoutY="269.0" prefHeight="50.0" prefWidth="116.0" visible="false" />
                   
-                                                                        <Label layoutX="43.0" layoutY="44.0" styleClass="txt-primary" text="Course Name" />
-                                                      <Label layoutX="46.0" layoutY="103.0" styleClass="txt-primary" text="Department" />
-                                                      <ChoiceBox fx:id="departmentField" layoutX="20.0" layoutY="120.0" prefHeight="25.0" prefWidth="116.0" styleClass="btn-success" />
-                                                      <Label layoutX="52.0" layoutY="171.0" styleClass="txt-primary" text="Instructor" />
-                                                      <ChoiceBox fx:id="instructorField" layoutX="19.0" layoutY="188.0" prefHeight="25.0" prefWidth="116.0" styleClass="btn-success" />
-                                                      <Label layoutX="43.0" layoutY="227.0" styleClass="txt-primary" text="Course Code" />
-                                                      <TextField fx:id="codeField" layoutX="20.0" layoutY="244.0" prefHeight="25.0" prefWidth="116.0" styleClass="btn-success" />
-                                                      <Label layoutX="19.0" layoutY="293.0" styleClass="txt-primary" text="Start Time" />
-                                                      <Label layoutX="86.0" layoutY="293.0" styleClass="txt-primary" text="End Time" textAlignment="CENTER" />
+                                                                        <Label layoutX="50.0" layoutY="44.0" styleClass="txt-primary" text="Course Name" />
+                                                      <Label layoutX="53.0" layoutY="103.0" styleClass="txt-primary" text="Department" />
+                                                      <ChoiceBox fx:id="departmentField" layoutX="27.0" layoutY="120.0" prefHeight="25.0" prefWidth="116.0" styleClass="btn-success" />
+                                                      <Label layoutX="59.0" layoutY="171.0" styleClass="txt-primary" text="Instructor" />
+                                                      <ChoiceBox fx:id="instructorField" layoutX="26.0" layoutY="188.0" prefHeight="25.0" prefWidth="116.0" styleClass="btn-success" />
+                                                      <Label layoutX="50.0" layoutY="227.0" styleClass="txt-primary" text="Course Code" />
+                                                      <TextField fx:id="codeField" layoutX="27.0" layoutY="244.0" prefHeight="25.0" prefWidth="116.0" styleClass="btn-success" />
+                                                      <Label layoutX="22.0" layoutY="293.0" styleClass="txt-primary" text="Start Time" />
+                                                      <Label layoutX="89.0" layoutY="293.0" styleClass="txt-primary" text="End Time" textAlignment="CENTER" />
                   
-                                                                        <CheckBox fx:id="MondayBox" layoutX="20.0" layoutY="363.0" mnemonicParsing="false" styleClass="txt-primary" text="Monday" />
-                                                      <CheckBox fx:id="TuesdayBox" layoutX="19.0" layoutY="396.0" mnemonicParsing="false" styleClass="txt-primary" text="Tuesday" />
-                                                      <CheckBox fx:id="WednesdayBox" layoutX="21.0" layoutY="430.0" mnemonicParsing="false" styleClass="txt-primary" text="Wednesday" />
-                                                      <CheckBox fx:id="ThursdayBox" layoutX="21.0" layoutY="467.0" mnemonicParsing="false" styleClass="txt-primary" text="Thursday" />
-                                                      <CheckBox fx:id="FridayBox" layoutX="23.0" layoutY="503.0" mnemonicParsing="false" styleClass="txt-primary" text="Friday" />
-                                                      <Button fx:id="courseSearchButton" layoutX="29.0" layoutY="541.0" mnemonicParsing="false" onAction="#search" prefHeight="25.0" prefWidth="91.0" styleClass="btn-primary" text="Search" />
-                                                      <ChoiceBox fx:id="startField" layoutX="17.0" layoutY="315.0" prefHeight="25.0" prefWidth="58.0" styleClass="btn-success" />
-                                                      <ChoiceBox fx:id="endField" layoutX="82.0" layoutY="315.0" prefHeight="25.0" prefWidth="58.0" styleClass="btn-success" />
+                                                                        <CheckBox fx:id="MondayBox" layoutX="48.0" layoutY="364.0" mnemonicParsing="false" styleClass="txt-primary" text="Monday" />
+                                                      <CheckBox fx:id="TuesdayBox" layoutX="48.0" layoutY="396.0" mnemonicParsing="false" styleClass="txt-primary" text="Tuesday" />
+                                                      <CheckBox fx:id="WednesdayBox" layoutX="48.0" layoutY="430.0" mnemonicParsing="false" styleClass="txt-primary" text="Wednesday" />
+                                                      <CheckBox fx:id="ThursdayBox" layoutX="48.0" layoutY="467.0" mnemonicParsing="false" styleClass="txt-primary" text="Thursday" />
+                                                      <CheckBox fx:id="FridayBox" layoutX="48.0" layoutY="503.0" mnemonicParsing="false" styleClass="txt-primary" text="Friday" />
+                                                      <Button fx:id="courseSearchButton" layoutX="38.0" layoutY="539.0" mnemonicParsing="false" onAction="#search" prefHeight="25.0" prefWidth="91.0" styleClass="btn-primary" text="Search" />
+                                                      <ChoiceBox fx:id="startField" layoutX="20.0" layoutY="315.0" prefHeight="25.0" prefWidth="58.0" styleClass="btn-success" />
+                                                      <ChoiceBox fx:id="endField" layoutX="85.0" layoutY="315.0" prefHeight="25.0" prefWidth="58.0" styleClass="btn-success" />
                                              <Separator layoutX="155.0" layoutY="6.0" orientation="VERTICAL" prefHeight="601.0" />
                                                   </children>
                                               </AnchorPane>
@@ -92,7 +92,7 @@
                                                    <Font name="System Bold" size="12.0" />
                                                 </font></Label>
                                                       <Button fx:id="reccSearchButton" layoutX="74.0" layoutY="158.0" mnemonicParsing="false" onAction="#openRecSchedule" styleClass="btn-primary" text="Search" />
-                                                      <ListView fx:id="scheduleList" layoutX="13.0" layoutY="338.0" prefHeight="179.0" prefWidth="173.0" />
+                                                      <ListView fx:id="scheduleList" layoutX="13.0" layoutY="338.0" prefHeight="179.0" prefWidth="190.0" />
                                                       <Button layoutX="46.0" layoutY="266.0" mnemonicParsing="false" onAction="#saveSchedule" prefHeight="34.0" prefWidth="108.0" styleClass="btn-primary" text="Save Schedule" />
                                                       <TextField fx:id="scheduleName" alignment="CENTER" layoutX="34.0" layoutY="229.0" prefHeight="25.0" prefWidth="131.0" promptText="Enter Schedule Name" styleClass="btn-success" />
                                                       <Button fx:id="modeSwitch" layoutX="62.0" layoutY="540.0" mnemonicParsing="false" onAction="#onModeSwitch" styleClass="btn-primary" text="Dark Mode" />
@@ -227,7 +227,7 @@
                                                               <RowConstraints prefHeight="38.93" />
                                                           </rowConstraints>
                                                       </GridPane>
-                                             <Separator layoutX="516.0" layoutY="7.0" orientation="VERTICAL" prefHeight="601.0" />
+                                             <Separator layoutX="516.0" layoutY="1.0" orientation="VERTICAL" prefHeight="601.0" prefWidth="7.0" />
                                           </children>
                                               </AnchorPane>
                                     </children>

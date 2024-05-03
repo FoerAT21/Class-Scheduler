@@ -30,3 +30,16 @@
 .txt-primary{
     -fx-text-fill: #282821;
 }
+
+.text-area.context {
+    -fx-text-alignment: left;
+}
+
+.list-view .list-cell:even {
+-fx-background-color: #FFFFFF;
+-fx-text-fill: #000000;
+}
+.list-view .list-cell:odd {
+-fx-background-color: #F5F5F5;
+-fx-text-fill: #000000;
+}

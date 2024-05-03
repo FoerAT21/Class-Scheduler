@@ -12,10 +12,9 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("mainWindow.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1000, 650);
+        Scene scene = new Scene(fxmlLoader.load(), 1000, 500);
         scene.getStylesheets().add(Main.class.getResource("lightmode.css").toExternalForm());
         stage.setTitle("Main Window!");
-        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }

@@ -40,3 +40,7 @@
     -fx-background-color: #383838;
     -fx-text-fill: #FFFFFF;
 }
+
+.label {
+    -fx-text-fill: #FFFFFF;
+}

@@ -13,7 +13,6 @@
 }
 
 .btn-primary{
-    -fx-border-radius: 0;
     -fx-background-color: #FFFFFF;
     -fx-text-fill: #282821;
     -fx-border-color: #808080;
@@ -40,4 +39,7 @@
 .list-view .list-cell:odd {
 -fx-background-color: #F5F5F5;
 -fx-text-fill: #000000;
+}
+
+.label {
 }

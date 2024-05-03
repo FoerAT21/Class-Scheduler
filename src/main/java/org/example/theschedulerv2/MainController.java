@@ -147,7 +147,7 @@ public class MainController implements Initializable {
             "Wolfe, Britton", "Wolfe, Daniel", "Wolinski, Jeffrey", "Wong, Ven Ney",
             "Wood, Darren", "Young, M", "Yowler, Brian", "Zhang, Youhui"};
 
-    private String[] majorList = {"Accounting"};
+    private String[] majorList = {"Accounting", "ComputerScienceBS", "Economics", "English", "Management"};
 
     String name;
     String department;

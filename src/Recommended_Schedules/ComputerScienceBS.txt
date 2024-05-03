@@ -1,0 +1,33 @@
+										Freshman Year
+Fall:											     Spring:
+COMP 141 Computer Programming ........................................3 COMP 220 Computer Programming II...........................................3
+COMP 155 Introduction to Computer Science......................3 MATH 162 Calculus II............................................................................4
+MATH 161 Calculus..........................................................................4 Science Elective........................................................................................4
+Science Elective..................................................................................4 WRIT 101 Foundations of Academic Discourse..........................3
+HUMA 102 Civ and the Biblical Revelation.............................3 PHYE 100 Healthful Living...................................................................1
+
+										Sophomore Year
+Fall:											      Spring:
+COMP 222 Introduction to Data Structs & Algorithms.......3 COMP 205 Ethics, Faith, and the Conscious Mind....................3
+COMP 244 Database Management.............................................3 COMP 230 Advanced Programming Parallel Computing......3
+MATH 213 Discrete Mathematics for Comp. Science..........4 COMP 342 Data Communication & Networking.......................3
+HUMA 200 Western Civilization...................................................3 MATH 214 Applied Probability & Linear Algebra......................4
+Foundations of Social Science Course.......................................3 HUMA 202 Civilization and Literature............................................3
+General Electives................................................................................1
+
+										Junior Year
+Fall:											       Spring:
+COMP 325 Computer Architecture & Organization..............3 COMP 314 Automata Theory...........................................................3
+COMP 422 Theory of Algorithms..................................................3 COMP 340 Operating Systems........................................................3
+Computer Science Elective..............................................................3 COMP 350 Software Engineering....................................................3
+Computer Science Elective..............................................................3 Computer Science Elective.................................................................3
+HUMA 301 Civilization and the Arts............................................3 General Electives....................................................................................4
+General Electives.................................................................................2
+
+										Senior Year
+Fall: 											      Spring:
+COMP 448 Computer Security......................................................3 COMP 424 Parallel and Distributed Computing........................3
+COMP 451 Senior Project I.............................................................2 COMP 452 Senior Project II................................................................3
+Computer Science Elective.............................................................3 Computer Science Elective..................................................................3
+HUMA 303 Christianity and Civilization....................................3 General Electives......................................................................................6
+General Electives................................................................................4

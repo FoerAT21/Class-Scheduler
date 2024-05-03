@@ -346,8 +346,12 @@ public class MainController implements Initializable {
         departmentField.getItems().addAll(departmentList);
         instructorField.getItems().addAll(instructorList);
         majorField.getItems().addAll(majorList);
-        startField.getItems().addAll(times);
-        endField.getItems().addAll(times);
+        startField.getItems().add(times[0]);
+        endField.getItems().add(times[0]);
+        for(int i = 1; i < times.length; i++){
+            startField.getItems().add(Class.convertTime(Integer.parseInt(times[i])));
+            endField.getItems().add(Class.convertTime(Integer.parseInt(times[i])));
+        }
 
         curUser.loadSavedSchedules();
 
@@ -636,7 +640,7 @@ public class MainController implements Initializable {
             // Tooltip to display class details
             Tooltip tooltip = new Tooltip("Course: " + c.getCourseName() + "\n" +
                     "Instructor: " + c.getInstructor() + "\n" +
-                    "Time: " + startTime + " - " + endTime);
+                    "Time: " + Class.convertTime(startTime) + " - " + Class.convertTime(endTime));
             Tooltip.install(classLabel, tooltip);
         }
         tab.getSelectionModel().select(scheduleTab);

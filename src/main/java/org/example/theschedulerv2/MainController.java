@@ -688,4 +688,12 @@ public class MainController implements Initializable {
     private void updateCreditsLabel() {
         creditsLabel.setText("Total Credits: " + totalCredits);
     }
+
+    @FXML
+    private void handleNewSchedule(ActionEvent event) {
+        scheduleGridPane.getChildren().removeIf(node -> GridPane.getRowIndex(node) != null && GridPane.getRowIndex(node) > 0 && GridPane.getColumnIndex(node) > 0);
+
+        // Clear the credits label
+        creditsLabel.setText("Total Credits: 0");
+    }
 }

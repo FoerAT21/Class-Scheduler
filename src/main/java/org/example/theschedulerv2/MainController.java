@@ -692,7 +692,8 @@ public class MainController implements Initializable {
     @FXML
     private void handleNewSchedule(ActionEvent event) {
         scheduleGridPane.getChildren().removeIf(node -> GridPane.getRowIndex(node) != null && GridPane.getRowIndex(node) > 0 && GridPane.getColumnIndex(node) > 0);
-
+        currSchedule = new Schedule();
+        scheduleName.setText("");
         // Clear the credits label
         creditsLabel.setText("Total Credits: 0");
     }

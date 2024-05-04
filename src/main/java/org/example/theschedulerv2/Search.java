@@ -11,7 +11,7 @@ public class Search {
 
     private static Connection connect() {
         // SQLite's connection string
-        String url = "jdbc:sqlite:C://sqlite/database.db";
+        String url = "jdbc:sqlite:src/main/resources/Database/database.db";
         Connection conn = null;
         try {
             conn = DriverManager.getConnection(url);

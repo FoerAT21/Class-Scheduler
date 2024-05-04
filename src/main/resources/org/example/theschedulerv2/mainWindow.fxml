@@ -59,10 +59,10 @@
                                                                         <Label layoutX="49.0" layoutY="44.0" styleClass="txt-primary" text="Course Name" />
                                                       <Label layoutX="52.0" layoutY="103.0" styleClass="txt-primary" text="Department" />
                                                       <ChoiceBox fx:id="departmentField" layoutX="26.0" layoutY="120.0" prefHeight="25.0" prefWidth="116.0" styleClass="btn-success" />
-                                                      <Label layoutX="58.0" layoutY="171.0" styleClass="txt-primary" text="Instructor" />
-                                                      <ChoiceBox fx:id="instructorField" layoutX="25.0" layoutY="188.0" prefHeight="25.0" prefWidth="116.0" styleClass="btn-success" />
-                                                      <Label layoutX="49.0" layoutY="227.0" styleClass="txt-primary" text="Course Code" />
-                                                      <TextField fx:id="codeField" layoutX="26.0" layoutY="244.0" prefHeight="25.0" prefWidth="116.0" styleClass="btn-success" />
+                                                      <Label layoutX="58.0" layoutY="164.0" styleClass="txt-primary" text="Instructor" />
+                                                      <ChoiceBox fx:id="instructorField" layoutX="25.0" layoutY="181.0" prefHeight="25.0" prefWidth="116.0" styleClass="btn-success" />
+                                                      <Label layoutX="49.0" layoutY="225.0" styleClass="txt-primary" text="Course Code" />
+                                                      <TextField fx:id="codeField" layoutX="26.0" layoutY="242.0" prefHeight="25.0" prefWidth="116.0" styleClass="btn-success" />
                                                       <Label layoutX="22.0" layoutY="293.0" styleClass="txt-primary" text="Start Time" />
                                                       <Label layoutX="89.0" layoutY="293.0" styleClass="txt-primary" text="End Time" textAlignment="CENTER" />
                   
@@ -87,19 +87,22 @@
                                                       </Label>
                                                       <Label layoutX="73.0" layoutY="105.0" styleClass="txt-primary" text="Select Major" />
                                                       <ChoiceBox fx:id="majorField" layoutX="48.0" layoutY="123.0" prefHeight="25.0" prefWidth="116.0" styleClass="btn-success" />
-                                                      <Label layoutX="17.0" layoutY="332.0" styleClass="txt-primary" text="Saved Schedules:">
+                                                      <Label layoutX="17.0" layoutY="345.0" styleClass="txt-primary" text="Saved Schedules:">
                                                 <font>
                                                    <Font name="System Bold" size="12.0" />
                                                 </font></Label>
                                                       <Button fx:id="reccSearchButton" layoutX="80.0" layoutY="158.0" mnemonicParsing="false" onAction="#openRecSchedule" styleClass="btn-primary" text="Search" />
-                                                      <ListView fx:id="scheduleList" layoutX="13.0" layoutY="350.0" prefHeight="167.0" prefWidth="190.0" />
-                                                      <Button layoutX="52.0" layoutY="266.0" mnemonicParsing="false" onAction="#saveSchedule" prefHeight="14.0" prefWidth="108.0" styleClass="btn-primary" text="Save Schedule" />
+                                                      <ListView fx:id="scheduleList" layoutX="13.0" layoutY="363.0" prefHeight="167.0" prefWidth="190.0" />
+                                                      <Button layoutX="52.0" layoutY="267.0" mnemonicParsing="false" onAction="#saveSchedule" prefHeight="14.0" prefWidth="108.0" styleClass="btn-primary" text="Save Schedule" />
                                                       <TextField fx:id="scheduleName" alignment="CENTER" layoutX="40.0" layoutY="229.0" prefHeight="25.0" prefWidth="131.0" promptText="Enter Schedule Name" styleClass="btn-success" />
-                                                      <Button fx:id="modeSwitch" layoutX="68.0" layoutY="540.0" mnemonicParsing="false" onAction="#onModeSwitch" styleClass="btn-primary" text="Dark Mode" />
-                                             <Label layoutX="64.0" layoutY="211.0" text="Schedule Name" />
+                                                      <Button fx:id="modeSwitch" layoutX="68.0" layoutY="545.0" mnemonicParsing="false" onAction="#onModeSwitch" styleClass="btn-primary" text="Dark Mode" />
+                                             <Label layoutX="64.0" layoutY="211.0" text="Schedule Name">
+                                                <font>
+                                                   <Font name="System Bold" size="12.0" />
+                                                </font></Label>
                                              <Separator layoutX="21.0" layoutY="200.0" prefWidth="175.0" />
                                              <Separator layoutX="18.0" layoutY="33.0" prefWidth="175.0" />
-                                             <Button layoutX="55.0" layoutY="300.0" mnemonicParsing="false" onAction="#handleNewSchedule" prefHeight="25.0" prefWidth="102.0" styleClass="btn-primary" text="New Schedule" />
+                                             <Button layoutX="52.0" layoutY="305.0" mnemonicParsing="false" onAction="#handleNewSchedule" prefHeight="25.0" prefWidth="108.0" styleClass="btn-primary" text="Clear Schedule" />
                                                   </children>
                                               </AnchorPane>
                                               <AnchorPane layoutX="151.0" layoutY="9.0" minHeight="0.0" minWidth="0.0" prefHeight="575.0" prefWidth="516.0" styleClass="success">
@@ -258,7 +261,7 @@
                                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                     <children>
                                         <TextArea fx:id="recText" layoutX="198.0" prefHeight="590.0" prefWidth="693.0" styleClass=".text-area.content" />
-                                 <Label layoutX="21.0" layoutY="25.0" styleClass=".label" text="Reccomended Schedule">
+                                 <Label layoutX="21.0" layoutY="25.0" styleClass=".label" text="Recommended Schedule">
                                     <font>
                                        <Font name="System Bold" size="14.0" />
                                     </font>

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Schedule {
-    private ArrayList<ArrayList<Class>> database;
     private String scheduleName;
     private ArrayList<Class> classesInSchedule;
     private int numCredits;
@@ -15,19 +14,7 @@ public class Schedule {
         this.numCredits = 0;
         this.classesInSchedule = new ArrayList<>();
     }
-    public Schedule(ArrayList<ArrayList<Class>> db){
-        this.database = db;
-        this.scheduleName = "";
-        this.numCredits = 0;
-        this.classesInSchedule = new ArrayList<>();
-    }
 
-    public Schedule(ArrayList<ArrayList<Class>> db, String scheduleName){
-        this.database = db;
-        this.scheduleName = scheduleName;
-        numCredits = 0;
-        classesInSchedule = new ArrayList<>();
-    }
 
     public Schedule(String scheduleName){
         this.scheduleName = scheduleName;
@@ -44,6 +31,9 @@ public class Schedule {
         this.scheduleName = name;
     }
 
+    public int getNumCredits(){
+        return numCredits;
+    }
     public boolean addCourse(Class courseToAdd){
         if (courseToAdd != null) {
             int classCredits = courseToAdd.getNumCredits();
@@ -79,6 +69,7 @@ public class Schedule {
         for (Class c : classesInSchedule) {
             if (c.getIndexInDB() == indexInDB){
                 classesInSchedule.remove(c);
+                numCredits -= c.getNumCredits();
                 return true;
             }
         }

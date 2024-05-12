@@ -389,7 +389,6 @@ public class MainController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
                 currentSchedule = scheduleList.getSelectionModel().getSelectedItem();
-                totalCredits = 0;
                 scheduleName.setText(currentSchedule);
                 currSchedule = curUser.getSchedule(currentSchedule);
                 // Create an iterator to safely remove elements
@@ -406,8 +405,8 @@ public class MainController implements Initializable {
                 }
                 for (Class c : currSchedule.getClassesInSchedule()){
                     addToGridPane(c);
-                    addCredits(c.getNumCredits());
                 }
+                updateCreditsLabel();
             }
         });
 
@@ -452,7 +451,7 @@ public class MainController implements Initializable {
                             Optional<ButtonType> result = alert.showAndWait();
                             if (result.isPresent() && result.get() == yes) {
                                 addToGridPane(c);
-                                addCredits(c.getNumCredits());
+                                updateCreditsLabel();
                             }
                         }
                     }
@@ -656,7 +655,7 @@ public class MainController implements Initializable {
                                 iterator.remove(); // Use iterators remove method
                             }
                         }
-                        removeCredits(c.getNumCredits());
+                        updateCreditsLabel();
                     }
                 }
             });
@@ -672,21 +671,11 @@ public class MainController implements Initializable {
         tab.getSelectionModel().select(scheduleTab);
     }
 
-    // Method to add credits
-    public void addCredits(int credits) {
-        totalCredits += credits;
-        updateCreditsLabel();
-    }
 
-    // Method to remove credits
-    public void removeCredits(int credits) {
-        totalCredits -= credits;
-        updateCreditsLabel();
-    }
 
     // Method to update the credits label text
     private void updateCreditsLabel() {
-        creditsLabel.setText("Total Credits: " + totalCredits);
+        creditsLabel.setText("Total Credits: " + currSchedule.getNumCredits());
     }
 
     @FXML

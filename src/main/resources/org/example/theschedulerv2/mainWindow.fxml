@@ -58,9 +58,17 @@
                   
                                                                         <Label layoutX="49.0" layoutY="44.0" styleClass="txt-primary" text="Course Name" />
                                                       <Label layoutX="52.0" layoutY="103.0" styleClass="txt-primary" text="Department" />
-                                                      <ChoiceBox fx:id="departmentField" layoutX="26.0" layoutY="120.0" prefHeight="25.0" prefWidth="116.0" styleClass="btn-success" />
+                                                      <ChoiceBox fx:id="departmentField" layoutX="26.0" layoutY="120.0" prefHeight="25.0" prefWidth="116.0">
+                                                <styleClass>
+                                                   <String fx:value="btn-success" />
+                                                   <String fx:value=".choice-box .context-menu" />
+                                                </styleClass></ChoiceBox>
                                                       <Label layoutX="58.0" layoutY="164.0" styleClass="txt-primary" text="Instructor" />
-                                                      <ChoiceBox fx:id="instructorField" layoutX="25.0" layoutY="181.0" prefHeight="25.0" prefWidth="116.0" styleClass="btn-success" />
+                                                      <ChoiceBox fx:id="instructorField" layoutX="25.0" layoutY="181.0" prefHeight="25.0" prefWidth="116.0">
+                                                <styleClass>
+                                                   <String fx:value="btn-success" />
+                                                   <String fx:value=".choice-box .context-menu" />
+                                                </styleClass></ChoiceBox>
                                                       <Label layoutX="49.0" layoutY="225.0" styleClass="txt-primary" text="Course Code" />
                                                       <TextField fx:id="codeField" layoutX="26.0" layoutY="242.0" prefHeight="25.0" prefWidth="116.0" styleClass="btn-success" />
                                                       <Label layoutX="22.0" layoutY="293.0" styleClass="txt-primary" text="Start Time" />
@@ -72,8 +80,16 @@
                                                       <CheckBox fx:id="ThursdayBox" layoutX="48.0" layoutY="467.0" mnemonicParsing="false" styleClass="txt-primary" text="Thursday" />
                                                       <CheckBox fx:id="FridayBox" layoutX="48.0" layoutY="503.0" mnemonicParsing="false" styleClass="txt-primary" text="Friday" />
                                                       <Button fx:id="courseSearchButton" layoutX="38.0" layoutY="539.0" mnemonicParsing="false" onAction="#search" prefHeight="25.0" prefWidth="91.0" styleClass="btn-primary" text="Search" />
-                                                      <ChoiceBox fx:id="startField" layoutX="20.0" layoutY="315.0" prefHeight="25.0" prefWidth="58.0" styleClass="btn-success" />
-                                                      <ChoiceBox fx:id="endField" layoutX="85.0" layoutY="315.0" prefHeight="25.0" prefWidth="58.0" styleClass="btn-success" />
+                                                      <ChoiceBox fx:id="startField" layoutX="20.0" layoutY="315.0" prefHeight="25.0" prefWidth="58.0">
+                                                <styleClass>
+                                                   <String fx:value="btn-success" />
+                                                   <String fx:value=".choice-box .context-menu" />
+                                                </styleClass></ChoiceBox>
+                                                      <ChoiceBox fx:id="endField" layoutX="85.0" layoutY="315.0" prefHeight="25.0" prefWidth="58.0">
+                                                <styleClass>
+                                                   <String fx:value="btn-success" />
+                                                   <String fx:value=".choice-box .context-menu" />
+                                                </styleClass></ChoiceBox>
                                              <Separator layoutX="155.0" layoutY="6.0" orientation="VERTICAL" prefHeight="601.0" />
                                                   </children>
                                               </AnchorPane>
@@ -86,7 +102,11 @@
                                                           </font>
                                                       </Label>
                                                       <Label layoutX="73.0" layoutY="105.0" styleClass="txt-primary" text="Select Major" />
-                                                      <ChoiceBox fx:id="majorField" layoutX="48.0" layoutY="123.0" prefHeight="25.0" prefWidth="116.0" styleClass="btn-success" />
+                                                      <ChoiceBox fx:id="majorField" layoutX="48.0" layoutY="123.0" prefHeight="25.0" prefWidth="116.0">
+                                                <styleClass>
+                                                   <String fx:value="btn-success" />
+                                                   <String fx:value=".choice-box .context-menu" />
+                                                </styleClass></ChoiceBox>
                                                       <Label layoutX="17.0" layoutY="345.0" styleClass="txt-primary" text="Saved Schedules:">
                                                 <font>
                                                    <Font name="System Bold" size="12.0" />

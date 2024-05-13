@@ -23,6 +23,10 @@
     -fx-text-fill: #282821;
 }
 
+.choice-box .context-menu {
+      -fx-background-color: #282821;
+}
+
 .txt-primary {
     -fx-font-family: "Popping";
     -fx-text-fill: #FFFFFF;
